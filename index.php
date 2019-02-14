@@ -22,15 +22,18 @@ try {
     echo "Connected successfully </br>";
 
 //    $stmt = $conn->query("SELECT * FROM hairdressers");
-    $stmt = $conn->query("SELECT * FROM sys.tables");
+    $sql = "CREATE TABLE workers (
+      id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+      firstname VARCHAR(30) NOT NULL,
+      phone VARCHAR(30) NOT NULL,
+      status VARCHAR(50),
+)";
 
-    echo $stmt;
-//    while ($row = $stmt->fetch()) {
-//        echo $row['id']. " ";
-//        echo $row['firstname'] . " ";
-//        echo $row['phone']."<br />";
-//    }
-
+    if ($conn->query($sql) === TRUE) {
+        echo "Table MyGuests created successfully";
+    } else {
+        echo "Error creating table: " . $conn->error;
+    }
 }
 catch(PDOException $e)
 {
