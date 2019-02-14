@@ -4,15 +4,15 @@
 echo ('<h1>Labas</h1>');
 
 
-$servername = "localhost";
-$username = "nfq";
-$password = "nfq";
-$database = "nfq";
+//$servername = "localhost";
+//$username = "nfq";
+//$password = "nfq";
+//$database = "nfq";
 
-//$servername = "us-cdbr-iron-east-03.cleardb.net";
-//$username = "bdcf3ca3dc5a61";
-//$password = "8bdb1824";
-//$database = "heroku_c89f304222c3de3";
+$servername = "us-cdbr-iron-east-03.cleardb.net";
+$username = "bdcf3ca3dc5a61";
+$password = "8bdb1824";
+$database = "heroku_c89f304222c3de3";
 
 
 
