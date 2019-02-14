@@ -21,12 +21,15 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Connected successfully </br>";
 
-    $stmt = $conn->query("SELECT * FROM hairdressers");
-    while ($row = $stmt->fetch()) {
-        echo $row['id']. " ";
-        echo $row['firstname'] . " ";
-        echo $row['phone']."<br />";
-    }
+//    $stmt = $conn->query("SELECT * FROM hairdressers");
+    $stmt = $conn->query("SELECT * FROM sys.tables");
+
+    echo $stmt;
+//    while ($row = $stmt->fetch()) {
+//        echo $row['id']. " ";
+//        echo $row['firstname'] . " ";
+//        echo $row['phone']."<br />";
+//    }
 
 }
 catch(PDOException $e)
