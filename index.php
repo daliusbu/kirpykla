@@ -1,6 +1,6 @@
 <?php
 
 
-echo ('Labas');
+echo ('<h1>Labas</h1>');
 
 ?>
