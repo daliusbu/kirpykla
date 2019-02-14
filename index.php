@@ -21,19 +21,21 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Connected successfully </br>";
 
-//    $stmt = $conn->query("SELECT * FROM hairdressers");
-    $sql = "CREATE TABLE workers (
-      id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-      firstname VARCHAR(30) NOT NULL,
-      phone VARCHAR(30) NOT NULL,
-      status VARCHAR(50),
-)";
+    $table= "tcompany";
+    $columns = "ID INT( 11 ) AUTO_INCREMENT PRIMARY KEY, Prename VARCHAR( 50 ) NOT NULL, Name VARCHAR( 250 ) NOT NULL,
+ StreetA VARCHAR( 150 ) NOT NULL, StreetB VARCHAR( 150 ) NOT NULL, StreetC VARCHAR( 150 ) NOT NULL, 
+ County VARCHAR( 100 ) NOT NULL, Postcode VARCHAR( 50 ) NOT NULL, Country VARCHAR( 50 ) NOT NULL " ;
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Table MyGuests created successfully";
-    } else {
-        echo "Error creating table: " . $conn->error;
+
+    $createTable = $conn->exec("CREATE TABLE IF NOT EXISTS heroku_c89f304222c3de3.$table ($columns)");
+
+    if ($createTable)
+    {
+        echo "Table $table - Created!<br /><br />";
     }
+    else { echo "Table $table not successfully created! <br /><br />";
+    }
+
 }
 catch(PDOException $e)
 {
