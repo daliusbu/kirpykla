@@ -16,12 +16,12 @@ $password = "8bdb1824";
 
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=nfq", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=heroku_c89f304222c3de3", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Connected successfully </br>";
 
-    $stmt = $conn->query("SELECT * FROM heroku_c89f304222c3de3");
+    $stmt = $conn->query("SELECT * FROM hairdressers");
     while ($row = $stmt->fetch()) {
         echo $row['id']. " ";
         echo $row['firstname'] . " ";
