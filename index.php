@@ -7,16 +7,18 @@ echo ('<h1>Labas</h1>');
 //$servername = "localhost";
 //$username = "nfq";
 //$password = "nfq";
+//$database = "nfq";
 
 $servername = "us-cdbr-iron-east-03.cleardb.net";
 $username = "bdcf3ca3dc5a61";
 $password = "8bdb1824";
+$database = "heroku_c89f304222c3de3";
 
 
 
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=heroku_c89f304222c3de3", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Connected successfully </br>";
@@ -26,7 +28,7 @@ try {
      status VARCHAR( 50 ) " ;
 
 
-    $createTable = $conn->exec("CREATE TABLE IF NOT EXISTS heroku_c89f304222c3de3.$table ($columns)");
+    $createTable = $conn->exec("CREATE TABLE IF NOT EXISTS $database.$table ($columns)");
 
     if ($createTable)
     {
@@ -34,15 +36,15 @@ try {
     }
     else { echo "Table $table not successfully created! <br /><br />";
     }
-    $sql = "INSERT INTO heroku_c89f304222c3de3.$table (firstname, phone, status) VALUES ('Jonas', '8 4534 456 456745', 'laisvas')";
+    $sql = "INSERT INTO $database.$table (firstname, phone, status) VALUES ('Rabinas', 'vienasvienas', 'laisvas')";
     $added = $conn->exec($sql);
     if ($added){
         echo ('Record added');
     }
 
-    $stmt = $conn->query("SELECT * FROM  heroku_c89f304222c3de3.$table ");
+    $stmt = $conn->query("SELECT * FROM  $database.$table ");
     while ($row = $stmt->fetch(PDO::FETCH_NUM)){
-        echo ('<p> {$row[0] row[1] row[2] row[3] } </p>');
+        echo ("<p>{$row[1]} $row[2] $row[3]</p>");
     }
 
 
