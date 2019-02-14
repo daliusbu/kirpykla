@@ -22,7 +22,7 @@ try {
     echo "Connected successfully </br>";
 
     $table= "workers";
-    $columns = "id INT( 11 ) AUTO_INCREMENT PRIMARY KEY, firstname VARCHAR( 50 ) NOT NULL, phone VARCHAR( 50 )
+    $columns = "id INT( 11 ) AUTO_INCREMENT PRIMARY KEY, firstname VARCHAR( 50 ) NOT NULL, phone VARCHAR( 50 ),
      status VARCHAR( 50 ) " ;
 
 
