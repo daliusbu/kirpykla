@@ -34,10 +34,15 @@ try {
     }
     else { echo "Table $table not successfully created! <br /><br />";
     }
-    $sql = "INSERT INTO heroku_c89f304222c3de3.$table (firstname, phone, status) VALUES ('Petras', '8 699 565 4545', 'uzimtas')";
+    $sql = "INSERT INTO heroku_c89f304222c3de3.$table (firstname, phone, status) VALUES ('Jonas', '8 4534 456 456745', 'laisvas')";
     $added = $conn->exec($sql);
     if ($added){
         echo ('Record added');
+    }
+
+    $stmt = $conn->query("SELECT * FROM  heroku_c89f304222c3de3.$table ");
+    while ($row = $stmt->fetch(PDO::FETCH_NUM)){
+        echo ('<p> {$row[0] row[1] row[2] row[3] } </p>');
     }
 
 
