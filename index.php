@@ -34,6 +34,12 @@ try {
     }
     else { echo "Table $table not successfully created! <br /><br />";
     }
+    $sql = "INSERT INTO heroku_c89f304222c3de3.$table (firstname, phone, status) VALUES ('Petras', '8 699 565 4545', 'uzimtas')";
+    $added = $conn->exec($sql);
+    if ($added){
+        echo ('Record added');
+    }
+
 
 
 }
