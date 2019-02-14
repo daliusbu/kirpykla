@@ -4,15 +4,15 @@
 echo ('<h1>Labas</h1>');
 
 
-//$servername = "localhost";
-//$username = "nfq";
-//$password = "nfq";
-//$database = "nfq";
+$servername = "localhost";
+$username = "nfq";
+$password = "nfq";
+$database = "nfq";
 
-$servername = "us-cdbr-iron-east-03.cleardb.net";
-$username = "bdcf3ca3dc5a61";
-$password = "8bdb1824";
-$database = "heroku_c89f304222c3de3";
+//$servername = "us-cdbr-iron-east-03.cleardb.net";
+//$username = "bdcf3ca3dc5a61";
+//$password = "8bdb1824";
+//$database = "heroku_c89f304222c3de3";
 
 
 
@@ -25,7 +25,7 @@ try {
 
     $table= "workers";
     $columns = "id INT( 11 ) AUTO_INCREMENT PRIMARY KEY, firstname VARCHAR( 50 ) NOT NULL, phone VARCHAR( 50 ),
-     status VARCHAR( 50 ) " ;
+     status VARCHAR( 50 ), password VARCHAR(50) NOT NULL " ;
 
 
     $createTable = $conn->exec("CREATE TABLE IF NOT EXISTS $database.$table ($columns)");
@@ -36,7 +36,7 @@ try {
     }
     else { echo "Table $table not successfully created! <br /><br />";
     }
-    $sql = "INSERT INTO $database.$table (firstname, phone, status) VALUES ('Rabinas', 'vienasvienas', 'laisvas')";
+    $sql = "INSERT INTO $database.$table (firstname, phone, status, password) VALUES ('Rabinas', 'vienasvienas', 'laisvas', 'rabinas')";
     $added = $conn->exec($sql);
     if ($added){
         echo ('Record added');
@@ -44,7 +44,7 @@ try {
 
     $stmt = $conn->query("SELECT * FROM  $database.$table ");
     while ($row = $stmt->fetch(PDO::FETCH_NUM)){
-        echo ("<p>{$row[1]} $row[2] $row[3]</p>");
+        echo ("<p>{$row[1]} $row[2] $row[3] $row[4]</p>");
     }
 
 
