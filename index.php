@@ -4,9 +4,16 @@
 echo ('<h1>Labas</h1>');
 
 
-$servername = "localhost";
-$username = "nfq";
-$password = "nfq";
+//$servername = "localhost";
+//$username = "nfq";
+//$password = "nfq";
+
+$servername = "us-cdbr-iron-east-03.cleardb.net";
+$username = "bdcf3ca3dc5a61";
+$password = "8bdb1824";
+
+
+
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=nfq", $username, $password);
@@ -14,7 +21,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Connected successfully </br>";
 
-    $stmt = $conn->query("SELECT * FROM hairdressers");
+    $stmt = $conn->query("SELECT * FROM heroku_c89f304222c3de3");
     while ($row = $stmt->fetch()) {
         echo $row['id']. " ";
         echo $row['firstname'] . " ";
