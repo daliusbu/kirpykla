@@ -21,10 +21,9 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Connected successfully </br>";
 
-    $table= "tcompany";
-    $columns = "ID INT( 11 ) AUTO_INCREMENT PRIMARY KEY, Prename VARCHAR( 50 ) NOT NULL, Name VARCHAR( 250 ) NOT NULL,
- StreetA VARCHAR( 150 ) NOT NULL, StreetB VARCHAR( 150 ) NOT NULL, StreetC VARCHAR( 150 ) NOT NULL, 
- County VARCHAR( 100 ) NOT NULL, Postcode VARCHAR( 50 ) NOT NULL, Country VARCHAR( 50 ) NOT NULL " ;
+    $table= "workers";
+    $columns = "id INT( 11 ) AUTO_INCREMENT PRIMARY KEY, firstname VARCHAR( 50 ) NOT NULL, phone VARCHAR( 50 )
+     status VARCHAR( 50 ) " ;
 
 
     $createTable = $conn->exec("CREATE TABLE IF NOT EXISTS heroku_c89f304222c3de3.$table ($columns)");
@@ -35,6 +34,7 @@ try {
     }
     else { echo "Table $table not successfully created! <br /><br />";
     }
+
 
 }
 catch(PDOException $e)
