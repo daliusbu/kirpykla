@@ -6,7 +6,7 @@
  * Time: 12.16
  */
 
-class aboutModel
+class StaffModel
 {
 
     private $message;
@@ -19,6 +19,17 @@ class aboutModel
     public function nowADays()
     {
         return $this->message = "nowadays everybody wants to be a boss.";
+    }
+
+    public function getit()
+    {
+        return 'OHOOHO';
+    }
+
+    public function getAllCustomers()
+    {
+        require_once 'DatabaseHelpers.php';
+        return (new DatabaseHelpers())->getAllCustomers();
     }
 
 }

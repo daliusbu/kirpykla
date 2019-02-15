@@ -60,8 +60,8 @@ if ($url == '/')
         $controllerName = ucfirst($requestedController).'Controller';
         $viewName       = ucfirst($requestedController).'View';
 
-        $controllerObj  = new $controllerName( new $modelName );
-        $viewObj        = new $viewName( $controllerObj, new $modelName );
+        $controllerObj  = new $controllerName( new $modelName, new $viewName);
+//        $viewObj        = new $viewName( $controllerObj, new $modelName );
 
 
         // If there is a method - Second parameter
@@ -69,7 +69,9 @@ if ($url == '/')
         {
             // then we call the method via the view
             // dynamic call of the view
-            print $viewObj->$requestedAction($requestedParams);
+            echo "I am here</br>";
+            var_dump ($requestedAction);
+            print $controllerObj->$requestedAction($requestedParams);
 
         }
 
