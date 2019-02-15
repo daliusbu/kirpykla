@@ -24,7 +24,22 @@ $username = "bdcf3ca3dc5a61";
 $password = "8bdb1824";
 $database = "heroku_c89f304222c3de3";
 
+// --- page redirect logic ---
 
+//if (!isset($_SERVER['PATH_INFO']))
+//{
+//
+//
+//    //echo "Home page";
+//    exit();
+//}
+
+echo $_SERVER['PATH_INFO'];
+exit();
+
+print "The request path is : ".$_SERVER['PATH_INFO'];
+
+// ----------------------
 
 
 try {
