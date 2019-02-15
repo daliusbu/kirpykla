@@ -3,15 +3,11 @@
 
 echo ('<h1>Labas</h1>');
 
+$url = isset($_SERVER['PATH_INFO']) ? explode('/', ltrim($_SERVER['PATH_INFO'], '/')) : '/';
 
-// --- Routing a request ---
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+var_dump($url);
 
-echo ($uri);
-
-
-
-
+exit();
 
 
 //$servername = "localhost";
@@ -26,15 +22,15 @@ $database = "heroku_c89f304222c3de3";
 
 // --- page redirect logic ---
 
-//if (!isset($_SERVER['PATH_INFO']))
-//{
-//
-//
-//    //echo "Home page";
-//    exit();
-//}
+if (!isset($_SERVER['PATH_INFO']))
+{
 
-echo $_SERVER['PATH_INFO'];
+
+    echo "Home page";
+    exit();
+}
+var_dump ($_SERVER['PATH_INFO']);
+//echo $_SERVER['PATH_INFO'];
 exit();
 
 print "The request path is : ".$_SERVER['PATH_INFO'];
