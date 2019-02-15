@@ -4,20 +4,31 @@
 echo ('<h1>Labas</h1>');
 
 
-//$servername = "localhost";
-//$username = "nfq";
-//$password = "nfq";
-//$database = "nfq";
+// --- Routing a request ---
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-$servername = "us-cdbr-iron-east-03.cleardb.net";
-$username = "bdcf3ca3dc5a61";
-$password = "8bdb1824";
-$database = "heroku_c89f304222c3de3";
+echo ($uri);
+
+
+
+
+
+
+$servername = "localhost";
+$username = "nfq";
+$password = "nfq";
+$database = "nfq";
+
+//$servername = "us-cdbr-iron-east-03.cleardb.net";
+//$username = "bdcf3ca3dc5a61";
+//$password = "8bdb1824";
+//$database = "heroku_c89f304222c3de3";
 
 
 
 
 try {
+//    Connect to the database
     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -36,12 +47,15 @@ try {
     }
     else { echo "Table $table not successfully created! <br /><br />";
     }
-    $sql = "INSERT INTO $database.$table (firstname, phone, status, password) VALUES ('Rabinas', 'vienasvienas', 'laisvas', 'rabinas')";
-    $added = $conn->exec($sql);
-    if ($added){
-        echo ('Record added');
-    }
+//    Insert a new record
+//    $sql = "INSERT INTO $database.$table (firstname, phone, status, password) VALUES ('Rabinas', 'vienasvienas', 'laisvas', 'rabinas')";
+//    $added = $conn->exec($sql);
+//    if ($added){
+//        echo ('Record added');
+//    }
 
+
+//    print out all records
     $stmt = $conn->query("SELECT * FROM  $database.$table ");
     while ($row = $stmt->fetch(PDO::FETCH_NUM)){
         echo ("<p>{$row[1]} $row[2] $row[3] $row[4]</p>");
