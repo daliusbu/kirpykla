@@ -17,7 +17,8 @@
 <?php
     if(!isset($_POST['submit']))
     {
-        echo $_SERVER['PHP_SELF'];
+
+        echo $_SERVER['PHP_SELF']. '/reservation/confirm';
 //        $name = $_POST['name'];
 //        echo "User Has submitted the form and entered this name : <b> $name </b>";
 //        echo "<br>You can use the following form again to enter a new name.";
@@ -26,7 +27,7 @@
 
 
 
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <form action="" method="post">
 
     <div class="form-row" >
         <div class="form-group col-md-6">

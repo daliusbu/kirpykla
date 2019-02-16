@@ -66,6 +66,11 @@ if ($url == '/')
         {
             // then we call the method via the view
             // dynamic call of the view
+//            if (isset($_POST['submit'])){
+//                print 'Form is submited';
+//            }
+//            print 'Very well';
+//            var_dump( $_POST);
             print $controllerObj->$requestedAction($requestedParams);
 
         }

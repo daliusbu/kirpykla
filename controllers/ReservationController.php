@@ -31,6 +31,13 @@ class ReservationController
         return $rezForm[36][1];
     }
 
+
+    public function confirm()
+    {
+        echo 'Confirm method activated';
+        var_dump($_POST);
+    }
+
     public function listAll($params = 'default')
     {
 
