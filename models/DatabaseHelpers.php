@@ -39,4 +39,17 @@ class DatabaseHelpers
         }
         return $customers;
     }
+
+    public function getAllTimes()
+    {
+        $conn = $this->connect();
+        $timesOcupied = [];
+        $table = "reservations";
+        $stmt = $conn->query("SELECT rezHour, rezMin FROM $table");
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)){
+            $timesOcupied[] = $row ;
+        }
+        return $timesOcupied;
+
+    }
 }

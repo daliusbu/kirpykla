@@ -25,7 +25,7 @@ class StaffView
 
 
 
-    public function listAll($arr)
+    public function listAll($customers)
     {
 
         require 'templates/CustomerList.php';

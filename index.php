@@ -5,9 +5,6 @@ echo ('<h1>Labas</h1>');
 
 $url = isset($_SERVER['PATH_INFO']) ? explode('/', ltrim($_SERVER['PATH_INFO'], '/')) : '/';
 
-var_dump($url);
-
-
 if ($url == '/')
 {
 
@@ -15,9 +12,9 @@ if ($url == '/')
     // Initiate the home controller
     // and render the home view
 
-    require_once __DIR__ . '/models/indexModel.php';
-    require_once __DIR__ . '/controllers/indexController.php';
-    require_once __DIR__ . '/views/indexView.php';
+    require_once __DIR__ . '/models/IndexModel.php';
+    require_once __DIR__ . '/controllers/IndexController.php';
+    require_once __DIR__ . '/views/IndexView.php';
 
     $indexModel = New IndexModel();
     $indexController = New IndexController($indexModel);
@@ -33,7 +30,7 @@ if ($url == '/')
     // and render the required view
 
     //The first element should be a controller
-    $requestedController = $url[0];
+    $requestedController = ucFirst($url[0]);
 
     // If a second part is added in the URI,
     // it should be a method
@@ -69,8 +66,6 @@ if ($url == '/')
         {
             // then we call the method via the view
             // dynamic call of the view
-            echo "I am here</br>";
-            var_dump ($requestedAction);
             print $controllerObj->$requestedAction($requestedParams);
 
         }

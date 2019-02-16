@@ -13,12 +13,16 @@
         <th>Phone</th>
         <th>Status</th>
         <th>Reserved</th>
+        <th>Update</th>
+        <th>Delete</th>
     </tr>
-        <?php foreach ($arr as $row){
+        <?php foreach ($customers as $customer){
             echo '<tr>';
-            foreach ($row as $item){
-                echo ("<td> $item  </td> ");
+            foreach ($customer as $data){
+                echo ("<td> $data  </td> ");
             }
+            echo "<td><a href='http://localhost/nfq/index.php/staff/update/" . $customer[0] . "' ><button>Keisti</button></a></td>";
+            echo "<td><a href='http://localhost/nfq/index.php/staff/delete/" . $customer[0] . "' ><button>Salinti</button></a></td>";
             echo '</tr>';
         } ?>
 </table>
