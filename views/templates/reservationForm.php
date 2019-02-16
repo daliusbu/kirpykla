@@ -14,19 +14,6 @@
 <div class="container">
 <h3>Rezervuokite laika</h3>
 
-<?php
-    if(!isset($_POST['submit']))
-    {
-
-        echo $_SERVER['PHP_SELF']. '/reservation/confirm';
-//        $name = $_POST['name'];
-//        echo "User Has submitted the form and entered this name : <b> $name </b>";
-//        echo "<br>You can use the following form again to enter a new name.";
-    }
-?>
-
-
-
     <form action="" method="post">
 
     <div class="form-row" >
