@@ -50,6 +50,53 @@ class DatabaseHelpers
             $timesOcupied[] = $row ;
         }
         return $timesOcupied;
+    }
+
+    public function storeReservation($reservation)
+    {
+        $conn = $this->connect();
+        $table = "reservations";
+
+        $month = $reservation['month'];
+        $day = $reservation['day'];
+        $timeArray = explode('|',$reservation['time']);
+        $hour = $timeArray[0];
+        $min = $timeArray[1];
+
+        return $conn->exec("INSERT INTO $table (customerId, dateFill, rezMonth, rezDay, rezHour, rezMin) VALUES  (12, NOW(), $month, $day, $hour, $min)");
+    }
+
+    public function getBusyTimes($month, $day)
+    {
+        $conn = $this->connect();
+        $timesOccupied = [];
+        $table = "reservations";
+        $stmt = $conn->query("SELECT rezHour, rezMin  FROM $table WHERE rezMonth = $month AND rezDay = $day");
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)){
+            $timesOccupied[] = $row ;
+        }
+        return $timesOccupied;
+    }
+
+    private function getCustByName($conn, $firstName, $phone){
+        $row = $conn->query("SELECT * FROM customers WHERE firstName = '$firstName' AND phone = '$phone'")->fetch();
+        return $row?  $row: -1;
+    }
+
+    public function updateCust($firstName, $phone, $visit){
+        $conn = $this->connect();
+        $cust = $this->getCustByName($conn, $firstName, $phone);
+        if ($cust == -1){
+            $visits = 1;
+            $conn->exec("INSERT INTO customers (created, firstName, phone, visits) VALUES  (NOW(), '$firstName', '$phone', $visits)");
+        }else{
+            $visits = $cust['visits'] + $visit;
+            $id = $cust['id'];
+            $conn->exec("UPDATE customers SET visits=$visits WHERE id = $id");
+        }
+
+        $cust = $this->getCustByName($conn, $firstName, $phone);
+        return $cust;
 
     }
 }

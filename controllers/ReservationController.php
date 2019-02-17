@@ -31,10 +31,20 @@ class ReservationController
         return $rezForm[36][1];
     }
 
+    public function getBusyTimes(){
+        $month = $_POST['month'];
+        $day = $_POST['day'];
+        $result = $this->modelObj->getFreeTimes($month, $day);
+        echo json_encode($result);
+    }
 
     public function confirm()
     {
-        echo 'Confirm method activated';
+        $reservation = $_POST;
+        $success = $this->modelObj->addReservation($reservation);
+        var_dump($success);
+        $message = $success? 'Jusu id yra ' : 'Rezervacija nepavyko. Bandykite dar karta';
+        echo $message;
         var_dump($_POST);
     }
 

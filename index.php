@@ -1,8 +1,5 @@
 <?php
 
-
-echo ('<h1>Labas</h1>');
-
 $url = isset($_SERVER['PATH_INFO']) ? explode('/', ltrim($_SERVER['PATH_INFO'], '/')) : '/';
 
 if ($url == '/')
@@ -64,10 +61,7 @@ if ($url == '/')
         // If there is a method - Second parameter
         if ($requestedAction != '')
         {
-
-            var_dump( $_POST);
             print $controllerObj->$requestedAction($requestedParams);
-
         }
 
     }else{
