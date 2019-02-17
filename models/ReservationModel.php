@@ -8,29 +8,29 @@
 
 class ReservationModel
 {
-
-    public function getList()
+// Adds reservation to reservation table and adds or updates customer data in customers table
+// returns all customer and reservation data in array of 2 arrays
+    public function addReservation($reservation)
     {
-        include_once 'DatabaseHelpers.php';
-        $db = new DatabaseHelpers;
-        $timesOcupied = $db->getAllTimes();
-        return $timesOcupied;
-    }
-
-    public function addReservation($reservation){
-
         $firstName = $reservation['firstName'];
         $phone = $reservation['phone'];
 
         include_once 'DatabaseHelpers.php';
         $db = new DatabaseHelpers;
         $cust = $db->updateCust($firstName, $phone, 1);
+        $resrv = $db->storeReservation($reservation, $cust['id']);
 
-
-        $result = $db->storeReservation($reservation);
-        return $cust;
+        return [$cust, $resrv];
     }
 
+    public function getActiveReservation($id)
+    {
+        include_once 'DatabaseHelpers.php';
+        $db = new DatabaseHelpers;
+        $cust = $db->getActResById($id);
+    }
+
+// Returns array of times that are not in reservation database on passed in date
     public function getFreeTimes($month, $day)
     {
         include_once 'DatabaseHelpers.php';
@@ -44,7 +44,8 @@ class ReservationModel
                         }
                     }
                 }
-
         return $freeTimes;
     }
+
+
 }

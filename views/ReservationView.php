@@ -9,18 +9,17 @@
 class ReservationView
 {
 
-    public function getForm($timesOcupied)
+    public function getForm()
     {
-        $allTimes = [];
-        for ($hour=10; $hour<20; $hour++){
-            for ($min =0; $min<60; $min+=15){
-                $allTimes[] = [$hour, $min];
-            }
-        }
-        if (in_array([12,30], $timesOcupied)){
-            echo 'Time 12:30 is ocupied';
-        }
         include 'templates/reservationForm.php';
-        return $allTimes;
+    }
+
+    public function resConfirm($cust)
+    {
+
+
+        include 'templates/reservations/confirm.php';
+        $message = 'This is reservation View';
+        return $message;
     }
 }

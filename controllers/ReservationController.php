@@ -18,20 +18,14 @@ class ReservationController
         $this->viewObj = $view;
     }
 
-    public function test()
-    {
-        return "<h3>This is reservation controller</h3>";
-    }
-
+// Displays reservation form complete with all HTML
     public function make()
     {
-        $timesReserved = $this->modelObj->getList();
-        $rezForm = $this->viewObj->getForm($timesReserved);
-
-        return $rezForm[36][1];
+        $this->viewObj->getForm();
     }
 
-    public function getBusyTimes(){
+// Gets free times from reservations table and displays them as JSON for AJAX request from reservationForm
+    public function getFreeTimes(){
         $month = $_POST['month'];
         $day = $_POST['day'];
         $result = $this->modelObj->getFreeTimes($month, $day);
@@ -41,11 +35,11 @@ class ReservationController
     public function confirm()
     {
         $reservation = $_POST;
-        $success = $this->modelObj->addReservation($reservation);
-        var_dump($success);
-        $message = $success? 'Jusu id yra ' : 'Rezervacija nepavyko. Bandykite dar karta';
-        echo $message;
-        var_dump($_POST);
+        $cust = $this->modelObj->addReservation($reservation);
+        $view = $this->viewObj->resConfirm($cust);
+        var_dump($cust);
+        $message = $cust? 'Jusu id yra ' . $cust[0]: 'Rezervacija nepavyko. Bandykite dar karta';
+        echo $view;
     }
 
     public function listAll($params = 'default')

@@ -1,28 +1,14 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<?php include 'head.php'?>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <!-- Javascripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-    <title>Reservation form</title>
-
-</head>
 <body>
 <div class="container">
 <h3>Rezervuokite apsilankymo laika</h3>
 
-<!--    <form action="http://localhost/nfq/index.php/reservation/confirm" method="post">-->
+<!--TODO Change on Heroku-->
 
+<!--    <form action="http://localhost/nfq/index.php/reservation/confirm" method="post">-->
         <form action="https://glacial-coast-30595.herokuapp.com/index.php/reservation/confirm" method="post">
+
     <div class="form-row" >
         <div class="form-group col-md-6">
             <label for="phone">Telefono Nr.</label>
@@ -70,7 +56,7 @@
 
 <!--============================= JAVASCRIPTS ====================================-->
 
-<!--===== Get occupied times ======-->
+<!--===== Get free times for given date and populate select options in the Form ======-->
 <script>
     $(document).ready(function(){
         $("#day").change(function(){
@@ -78,22 +64,19 @@
             var month = $('#month').val();
             $.ajax({
                 type : "POST",
-                // url : "http://localhost/nfq/index.php/reservation/getBusyTimes",
+// TODO Change on Heroku
+//                 url : "http://localhost/nfq/index.php/reservation/getFreeTimes",
+                url : "https://glacial-coast-30595.herokuapp.com/index.php/reservation/getFreeTimes",
 
-                url : "https://glacial-coast-30595.herokuapp.com/index.php/reservation/getBusyTimes",
                 data : { 'month':month, 'day':day },
                 success : function(data) {
                     alert("it works " + data);
                     let minutes = '';
                     var opts = $.parseJSON(data);
                     $.each(opts, function(i, d) {
-                        // You will need to alter the below to get the right values from your json object.  Guessing that d.id / d.modelName are columns in your carModels data
                         minutes = d[1] == 0? '00':d[1];
                         $('#time').append('<option value="' + d[0] + '|' + d[1] +'">' + d[0] + ' : ' + minutes + '</option>');
                     });
-
-
-
                 }
             });
         });

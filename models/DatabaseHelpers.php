@@ -28,6 +28,8 @@ class DatabaseHelpers
         return $conn;
     }
 
+
+
     public function getAllCustomers()
     {
         $conn = $this->connect();
@@ -40,19 +42,10 @@ class DatabaseHelpers
         return $customers;
     }
 
-    public function getAllTimes()
-    {
-        $conn = $this->connect();
-        $timesOcupied = [];
-        $table = "reservations";
-        $stmt = $conn->query("SELECT rezHour, rezMin FROM $table");
-        while ($row = $stmt->fetch(PDO::FETCH_NUM)){
-            $timesOcupied[] = $row ;
-        }
-        return $timesOcupied;
-    }
 
-    public function storeReservation($reservation)
+//============= reservations ==============================
+
+    public function storeReservation($reservation, $custId)
     {
         $conn = $this->connect();
         $table = "reservations";
@@ -62,8 +55,23 @@ class DatabaseHelpers
         $timeArray = explode('|',$reservation['time']);
         $hour = $timeArray[0];
         $min = $timeArray[1];
+        $status = 'active';
 
-        return $conn->exec("INSERT INTO $table (customerId, dateFill, rezMonth, rezDay, rezHour, rezMin) VALUES  (12, NOW(), $month, $day, $hour, $min)");
+        $conn->exec("INSERT INTO $table (customerId, dateFill, rezMonth, rezDay, rezHour, rezMin, status) VALUES  ($custId, NOW(), $month, $day, $hour, $min, '$status')");
+
+        $result = $this->getActiveRes($custId);
+        return $result;
+
+    }
+
+    public function getActiveRes($custId)
+    {
+        $conn = $this->connect();
+        $stmt = $conn->query("SELECT *  FROM reservations WHERE customerId = $custId AND status = 'active'");
+        while ($row = $stmt->fetch()){
+            $reservations[] = $row ;
+        }
+        return $reservations;
     }
 
     public function getBusyTimes($month, $day)
@@ -77,6 +85,10 @@ class DatabaseHelpers
         }
         return $timesOccupied;
     }
+
+
+
+
 
     private function getCustByName($conn, $firstName, $phone){
         $row = $conn->query("SELECT * FROM customers WHERE firstName = '$firstName' AND phone = '$phone'")->fetch();
@@ -99,4 +111,14 @@ class DatabaseHelpers
         return $cust;
 
     }
+
+//============= reservations AND customers ==============================
+
+    public function getActResById($id){
+        $conn = $this->connect();
+        $row = $conn->query("SELECT (id, firstName, phone) FROM customers WHERE id=$id")->fetch();
+        return $row;
+    }
+
+
 }
