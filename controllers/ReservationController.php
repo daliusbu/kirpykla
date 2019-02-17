@@ -35,10 +35,10 @@ class ReservationController
     public function confirm()
     {
         $reservation = $_POST;
-        $cust = $this->modelObj->addReservation($reservation);
-        $view = $this->viewObj->resConfirm($cust);
-        var_dump($cust);
-        $message = $cust? 'Jusu id yra ' . $cust[0]: 'Rezervacija nepavyko. Bandykite dar karta';
+        $custRes = $this->modelObj->addReservation($reservation);
+        $view = $this->viewObj->resConfirm($custRes);
+        var_dump($custRes);
+        $message = $custRes? 'Jusu id yra ' . $custRes[0][0]: 'Rezervacija nepavyko. Bandykite dar karta';
         echo $view;
     }
 

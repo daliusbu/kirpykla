@@ -14,10 +14,16 @@ class ReservationView
         include 'templates/reservationForm.php';
     }
 
-    public function resConfirm($cust)
+    public function resConfirm($custRes)
     {
-
-
+        if($custRes[1][0][8] == 'isActive'){
+            $isActive = true;
+        }
+        $months = ['sausis', 'vasaris',
+            'kovas', 'balandis', 'gegužė',
+            'birželis', 'liepa', 'rugpjūtis',
+            'rugsėjis', 'spalis', 'lapkritis',
+            'gruodis'];
         include 'templates/reservations/confirm.php';
         $message = 'This is reservation View';
         return $message;

@@ -57,6 +57,12 @@ class DatabaseHelpers
         $min = $timeArray[1];
         $status = 'active';
 
+//      Check if customer has active reservations
+        $isActive = $this->getActiveRes($custId);
+        if ($isActive){
+            $isActive[0][] = 'isActive';
+            return $isActive;
+        }
         $conn->exec("INSERT INTO $table (customerId, dateFill, rezMonth, rezDay, rezHour, rezMin, status) VALUES  ($custId, NOW(), $month, $day, $hour, $min, '$status')");
 
         $result = $this->getActiveRes($custId);

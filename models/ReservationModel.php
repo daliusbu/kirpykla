@@ -18,9 +18,9 @@ class ReservationModel
         include_once 'DatabaseHelpers.php';
         $db = new DatabaseHelpers;
         $cust = $db->updateCust($firstName, $phone, 1);
-        $resrv = $db->storeReservation($reservation, $cust['id']);
+        $res = $db->storeReservation($reservation, $cust['id']);
 
-        return [$cust, $resrv];
+        return [$cust, $res];
     }
 
     public function getActiveReservation($id)

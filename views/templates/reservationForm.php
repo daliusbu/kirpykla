@@ -7,7 +7,7 @@
 <!--TODO Change on Heroku-->
 
 <!--    <form action="http://localhost/nfq/index.php/reservation/confirm" method="post">-->
-        <form action="https://glacial-coast-30595.herokuapp.com/index.php/reservation/confirm" method="post">
+<form action="https://glacial-coast-30595.herokuapp.com/index.php/reservation/confirm" method="post">
 
     <div class="form-row" >
         <div class="form-group col-md-6">
