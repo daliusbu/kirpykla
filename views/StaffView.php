@@ -16,10 +16,6 @@ class StaffView
 
     function __construct()   //$controller, $model
     {
-//        $this->controller = $controller;
-//
-//        $this->modelObj = $model;
-
         print "About - ";
     }
 
@@ -32,6 +28,16 @@ class StaffView
     }
 
 
+    public function showReservations($resCust)
+    {
+        $months = ['sausis', 'vasaris',
+            'kovas', 'balandis', 'gegužė',
+            'birželis', 'liepa', 'rugpjūtis',
+            'rugsėjis', 'spalis', 'lapkritis',
+            'gruodis'];
+
+        require 'templates/staff/resCust.php';
+    }
 
     public function now()
     {

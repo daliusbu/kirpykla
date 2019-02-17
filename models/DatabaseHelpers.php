@@ -93,6 +93,16 @@ class DatabaseHelpers
     }
 
 
+    public function getRes()
+    {
+        $conn = $this->connect();
+        $stmt = $conn->query("SELECT * FROM reservations r INNER JOIN customers c ON r.customerId = c.id WHERE r.status = 'active'");
+        while ($row = $stmt->fetch()){
+            $reservations[] = $row ;
+        }
+        return $reservations;
+    }
+
 
 
 

@@ -24,11 +24,14 @@ class StaffController
         return $this->modelObj->message = "About us today changed by aboutController.";
     }
 
-    public function listAll($params = 'default')
+    public function reservations($params = 'default')
     {
-        $customers = $this->modelObj->getAllcustomers();
-        return $this->viewObj->listAll($customers);
+        echo 'Staff controlle reservations method';
+        $reservations = $this->modelObj->getReservations();
+        $this->viewObj->showReservations($reservations);
 
-        return "This is " . $customers[1][1];
+        var_dump($reservations);
+
+        return "This is it";
     }
 }

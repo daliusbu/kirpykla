@@ -26,6 +26,14 @@ class StaffModel
         return 'OHOOHO';
     }
 
+    public function getReservations()
+    {
+        include_once 'DatabaseHelpers.php';
+        $db = new DatabaseHelpers;
+        $reservations = $db->getRes();
+        return $reservations;
+    }
+
     public function getAllCustomers()
     {
         require_once 'DatabaseHelpers.php';
