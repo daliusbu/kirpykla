@@ -78,7 +78,9 @@
             var month = $('#month').val();
             $.ajax({
                 type : "POST",
-                url : "http://localhost/nfq/index.php/reservation/getBusyTimes",
+                // url : "http://localhost/nfq/index.php/reservation/getBusyTimes",
+
+                url : "https://glacial-coast-30595.herokuapp.com/index.php/reservation/getBusyTimes",
                 data : { 'month':month, 'day':day },
                 success : function(data) {
                     alert("it works " + data);
