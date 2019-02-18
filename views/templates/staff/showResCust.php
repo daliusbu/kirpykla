@@ -7,7 +7,7 @@
     <div class="mt-4 mx-auto">
         <p>Paieska rezultatuose</p>
 
-        <form name="filterRes" method="post">
+        <form name="filterRes" method="get">
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="lpp">Rodyti irasu</label>
@@ -39,9 +39,6 @@
 
                 </div>
 
-
-
-
                 <div class="form-group col-md-3 ">
                     <label for="endMonth">Pabaigos data</label>
                     <div class="form-row">
@@ -56,14 +53,7 @@
                             } ?>
                         </select>
                     </div>
-
                 </div>
-
-
-
-
-
-
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Filtruoti</button>
@@ -71,11 +61,6 @@
         </form>
 
     </div>
-    <?php
-        if (isset($_POST['lpp'])){
-            echo('The form was submitted');
-        }
-    ?>
 
     <table id="example" class="table display"  style="width:100%">
         <thead>
@@ -91,7 +76,7 @@
         <tbody>
         <?php
         $i = 1;
-        foreach($resCust as $row){ ?>
+        foreach($resCust[0] as $row){ ?>
             <tr>
                 <th scope="row"><?php echo $i; ?></th>
                 <td><?php echo $row['firstName']; ?></td>
@@ -108,17 +93,68 @@
 
     </table>
 
+
+    <!--    PAGINATION    -->
+
+    <div class="h-100 row align-items-center" style="margin-left: 40%; margin-bottom: 40px;">
+
+        <nav>
+            <ul class="pagination">
+                <?php
+
+                $range = 3;
+
+                // if not on page 1, don't show back links
+                if ($currentpage > 1) {
+                    // show << link to go back to page 1
+                    echo " <li class=\"page-item\"><a class=\"page-link\" href='{$_SERVER['PHP_SELF']}?{$_SERVER['QUERY_STRING']}&currentpage=1'> << </a> </li>";
+                    // get previous page num
+                    $prevpage = $currentpage - 1;
+                    // show < link to go back to 1 page
+                    echo " <li class=\"page-item\"><a class=\"page-link\" class=\"page-link\"href='{$_SERVER['PHP_SELF']}?{$_SERVER['QUERY_STRING']}&currentpage=$prevpage'> < </a></li>";
+                } // end if
+
+                // loop to show links to range of pages around current page
+                for ($x = ($currentpage - $range); $x < (($currentpage + $range) + 1); $x++) {
+                    // if it's a valid page number...
+                    if (($x > 0) && ($x <= $totalpages)) {
+                        // if we're on current page...
+                        if ($x == $currentpage) {
+                            // 'highlight' it but don't make a link
+                            echo " <a class=\"page-item\"><a class=\"page-link\" href='#'><b>$x</b></a></li> ";
+                            // if not current page...
+                        } else {
+                            // make it a link
+                            echo " <li class=\"page-item\"><a class=\"page-link\" href='{$_SERVER['PHP_SELF']}?{$_SERVER['QUERY_STRING']}&currentpage=$x'>$x</a></li> ";
+                        } // end else
+                    } // end if
+                } // end for
+
+                // if not on last page, show forward and last page links
+                if ($currentpage != $totalpages) {
+                    // get next page
+                    $nextpage = $currentpage + 1;
+                    // echo forward link for next page
+                    echo " <li class=\"page-item\"><a class=\"page-link\" href='{$_SERVER['PHP_SELF']}?{$_SERVER['QUERY_STRING']}&currentpage=$nextpage'> > </a></li> ";
+                    // echo forward link for lastpage
+                    echo " <li class=\"page-item\"><a class=\"page-link\" href='{$_SERVER['PHP_SELF']}?{$_SERVER['QUERY_STRING']}&currentpage=$totalpages'> >> </a></li> ";
+                } // end if
+                ?>
+            </ul>
+        </nav>
+    </div>
 </div>
+
 
 <!--================ Javascrpits ===================-->
 
 <script type="text/javascript">
-    document.getElementById('lpp').value = "<?php echo $_POST['lpp'];?>";
-    document.getElementById('firstName').value = "<?php echo $_POST['firstName'];?>";
-    document.getElementById('startMonth').value = "<?php echo $_POST['startMonth'];?>";
-    document.getElementById('startDay').value = "<?php echo $_POST['startDay'];?>";
-    document.getElementById('endMonth').value = "<?php echo $_POST['endMonth'];?>";
-    document.getElementById('endDay').value = "<?php echo $_POST['endDay'];?>";
+    document.getElementById('lpp').value = "<?php echo $_GET['lpp'];?>";
+    document.getElementById('firstName').value = "<?php echo $_GET['firstName'];?>";
+    document.getElementById('startMonth').value = "<?php echo $_GET['startMonth'];?>";
+    document.getElementById('startDay').value = "<?php echo $_GET['startDay'];?>";
+    document.getElementById('endMonth').value = "<?php echo $_GET['endMonth'];?>";
+    document.getElementById('endDay').value = "<?php echo $_GET['endDay'];?>";
 </script>
 
 <script>

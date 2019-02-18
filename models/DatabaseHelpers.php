@@ -118,14 +118,25 @@ class DatabaseHelpers
         return $row;
     }
 
-    public function getRes($firstName, $lpp, $startMonth, $startDay, $endMonth, $endDay)
+    public function getNumberOfRows()
+    {
+
+    }
+
+    public function getRes($firstName, $lpp, $offset, $startMonth, $startDay, $endMonth, $endDay)
     {
         $conn = $this->connect();
-        $stmt = $conn->query("SELECT * FROM reservations r INNER JOIN customers c ON r.customerId = c.id WHERE r.status = 'active' AND c.firstName LIKE '$firstName%' AND ((r.rezMonth = $startMonth  AND r.rezDay >= $startDay) OR (r.rezMonth < $endMonth AND r.rezMonth > $startMonth)OR ( r.rezMonth = $endMonth AND r.rezDay <= $endDay)) ORDER BY c.visits DESC LIMIT $lpp");
-        while ($row = $stmt->fetch()){
+
+        // Count Total number of records
+        $stmt1 = $conn->query("SELECT COUNT(r.id) FROM reservations r INNER JOIN customers c ON r.customerId = c.id WHERE r.status = 'active' AND c.firstName LIKE '$firstName%' AND ((r.rezMonth = $startMonth  AND r.rezDay >= $startDay) OR (r.rezMonth < $endMonth AND r.rezMonth > $startMonth)OR ( r.rezMonth = $endMonth AND r.rezDay <= $endDay)) ");
+        $totalRecords = $stmt1->fetch();
+
+        // Select line per page (lpp) number of records
+        $stmt2 = $conn->query("SELECT * FROM reservations r INNER JOIN customers c ON r.customerId = c.id WHERE r.status = 'active' AND c.firstName LIKE '$firstName%' AND ((r.rezMonth = $startMonth  AND r.rezDay >= $startDay) OR (r.rezMonth < $endMonth AND r.rezMonth > $startMonth)OR ( r.rezMonth = $endMonth AND r.rezDay <= $endDay)) ORDER BY c.visits DESC LIMIT $offset, $lpp");
+        while ($row = $stmt2->fetch()){
             $reservations[] = $row ;
         }
-        return $reservations;
+        return [$reservations, $totalRecords];
     }
 
 

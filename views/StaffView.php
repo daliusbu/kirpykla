@@ -20,6 +20,11 @@ class StaffView
 
     public function showReservations($resCust)
     {
+        $currentpage = $resCust[1];
+        $totalpages = $resCust[2];
+
+
+
         $months = ['sausis', 'vasaris',
             'kovas', 'balandis', 'gegužė',
             'birželis', 'liepa', 'rugpjūtis',
@@ -27,6 +32,8 @@ class StaffView
             'gruodis'];
 
         require 'templates/staff/showResCust.php';
+
+
     }
 
 
