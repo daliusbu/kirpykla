@@ -118,10 +118,10 @@ class DatabaseHelpers
         return $row;
     }
 
-    public function getRes($firstName, $lpp, $startMonth)
+    public function getRes($firstName, $lpp, $startMonth, $startDay, $endMonth, $endDay)
     {
         $conn = $this->connect();
-        $stmt = $conn->query("SELECT * FROM reservations r INNER JOIN customers c ON r.customerId = c.id WHERE r.status = 'active' AND c.firstName LIKE '$firstName%' AND r.rezMonth >= $startMonth LIMIT $lpp");
+        $stmt = $conn->query("SELECT * FROM reservations r INNER JOIN customers c ON r.customerId = c.id WHERE r.status = 'active' AND c.firstName LIKE '$firstName%' AND ((r.rezMonth = $startMonth  AND r.rezDay >= $startDay) OR (r.rezMonth < $endMonth AND r.rezMonth > $startMonth)OR ( r.rezMonth = $endMonth AND r.rezDay <= $endDay)) ORDER BY c.visits DESC LIMIT $lpp");
         while ($row = $stmt->fetch()){
             $reservations[] = $row ;
         }

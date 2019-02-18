@@ -30,7 +30,7 @@
                                 echo "<option value='$i'>$months[$i]</option>";
                             } ?>
                         </select>
-                        <select name="startDay" id="startMonth" class="form-control col-md-3">
+                        <select name="startDay" id="startDay" class="form-control col-md-3">
                             <?php for ($i = 1; $i<32; $i++){
                                 echo "<option value='$i'>$i</option>";
                             } ?>
@@ -50,7 +50,7 @@
                                 echo "<option value='$i'>$months[$i]</option>";
                             } ?>
                         </select>
-                        <select name="endDay" id="endMonth" class="form-control col-md-3">
+                        <select name="endDay" id="endDay" class="form-control col-md-3">
                             <?php for ($i = 1; $i<32; $i++){
                                 echo "<option value='$i'>$i</option>";
                             } ?>
@@ -85,7 +85,7 @@
             <th scope="col">Data</th>
             <th scope="col">Laikas</th>
             <th scope="col">Keisti</th>
-            <th scope="col">Liko iki bonus</th>
+            <th scope="col">Apsilankymai</th>
         </tr>
         </thead>
         <tbody>
@@ -98,7 +98,7 @@
                 <td><?php echo $months[$row['rezMonth'] -1] . ' ' . sprintf("%02d", $row['rezDay']); ?></td>
                 <td><?php echo $row['rezHour'] . ' : ' . sprintf("%02d", $row['rezMin']); ?></td>
                 <td><button>Keisti</button> <button>Salinti</button></td>
-                <td><?php echo 5 - $row[0]['visits']%5; ?></td>
+                <td><?php echo $row['visits']; ?></td>
             </tr>
             <?php $i++;} ?>
         </tbody>
@@ -107,6 +107,7 @@
         </tfoot>
 
     </table>
+
 </div>
 
 <!--================ Javascrpits ===================-->
@@ -114,7 +115,10 @@
 <script type="text/javascript">
     document.getElementById('lpp').value = "<?php echo $_POST['lpp'];?>";
     document.getElementById('firstName').value = "<?php echo $_POST['firstName'];?>";
-    //document.getElementById('lpp').value = "<?php //echo $_POST['lpp'];?>//";
+    document.getElementById('startMonth').value = "<?php echo $_POST['startMonth'];?>";
+    document.getElementById('startDay').value = "<?php echo $_POST['startDay'];?>";
+    document.getElementById('endMonth').value = "<?php echo $_POST['endMonth'];?>";
+    document.getElementById('endDay').value = "<?php echo $_POST['endDay'];?>";
 </script>
 
 <script>

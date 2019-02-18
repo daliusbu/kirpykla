@@ -21,9 +21,12 @@ class StaffModel
         include_once 'DatabaseHelpers.php';
         $firstName = $_POST['firstName']? $_POST['firstName']: '%';
         $lpp = $_POST['lpp']? $_POST['lpp']: 10;
-        $startMonth = $_POST['startMonth'] + 1;
+        $startMonth = $_POST['startMonth']? $_POST['startMonth'] + 1: 1; //date("m");
+        $startDay = $_POST['startDay']? $_POST['startDay']: 1; //date("d");
+        $endMonth = $_POST['endMonth']? $_POST['endMonth'] + 1: 12; //date("m");
+        $endDay = $_POST['endDay']? $_POST['endDay']: 31; //date("d");
         $db = new DatabaseHelpers;
-        $reservations = $db->getRes($firstName, $lpp, $startMonth);
+        $reservations = $db->getRes($firstName, $lpp, $startMonth, $startDay, $endMonth, $endDay);
         return $reservations;
     }
 
