@@ -1,6 +1,6 @@
 <?php include __DIR__ . "/../head.php" ;?>
 
-<body>
+
 <div class="container">
     <h2>Jusu rezervacija kirpykloje</h2>
     <?php
