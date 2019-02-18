@@ -8,22 +8,12 @@
 
 class StaffView
 {
-
-//    private $modelObj;
-//
-//    private $controller;
-
-
-    function __construct()   //$controller, $model
+    function __construct()
     {
-        print "About - ";
     }
-
-
 
     public function listAll($customers)
     {
-
         require 'templates/CustomerList.php';
     }
 
@@ -36,20 +26,10 @@ class StaffView
             'rugsėjis', 'spalis', 'lapkritis',
             'gruodis'];
 
-        require 'templates/staff/resCust.php';
+        require 'templates/staff/showResCust.php';
     }
 
-    public function now()
-    {
-//        return $this->modelObj->nowADays();
-        return 'Mow';
-    }
 
-    public function today()
-    {
-//        return $this->controller->current();
-        return 'Current';
-    }
 
 
 }

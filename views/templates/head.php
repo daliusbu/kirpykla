@@ -13,7 +13,6 @@
     <!-- Javascripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
@@ -41,27 +40,13 @@
                     Rezervacija
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="
-                    <?php echo
-                    $htp = $_SERVER['HTTPS']!='off' ? 'https://' : 'http://';
-                    ($htp.$_SERVER['SERVER_NAME'].'/nfq/index.php/reservation/make') ?>
-">Rezervuoti laika</a>
-                    <a class="dropdown-item" href="#">Keist rezervacija</a>
+                    <a class="dropdown-item"
+                       href="<?php echo ('http://'.$_SERVER['SERVER_NAME'].'/nfq/index.php/reservation/make'); ?>">Rezervuoti laika</a>
+                    <a class="dropdown-item" href="#">Keisti rezervacija</a>
+
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="<?php
-
-
-
-
-                    echo ($_SERVER['HTTPS'].
-                        $_SERVER['SERVER_NAME'].'/nfq/index.php/staff/reservations');
-                    ?>">
-                        <?php
-                            echo ($_SERVER['PATH_INFO'])
-                        ?>
-
-
-
+                    <a class="dropdown-item" href="#">
+                        Gelekas
                     </a>
                 </div>
             </li>
@@ -72,23 +57,14 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="
                     <?php echo ('http://'.$_SERVER['SERVER_NAME'].'/nfq/index.php/staff/reservations') ?>
-">Rezervuoti laika</a>
+">Klientu rezervacijos</a>
                     <a class="dropdown-item" href="#">Rezervacijos</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="<?php
-                    echo ('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'/../make')
-                    ?>">
-                        <?php
-                        echo ('http://'.$_SERVER['SERVER_NAME'].'......./make')
-                        ?>
+                    <a class="dropdown-item" href="">
+                       Belekas
                     </a>
                 </div>
             </li>
-<?php
-
-            $a = isset($_SERVER['HTTPS']);
-            var_dump ($a);
-          ?>
 
         </ul>
 

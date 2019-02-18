@@ -8,14 +8,7 @@
 
 class DatabaseHelpers
 {
-
-    public function testing()
-    {
-        return 'testing';
-    }
-
-
-
+//============= Connect to database ==============================
     public function connect()
     {
         $servername = "us-cdbr-iron-east-03.cleardb.net";
@@ -24,10 +17,8 @@ class DatabaseHelpers
         $database = "heroku_c89f304222c3de3";
         $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
         return $conn;
     }
-
 
 
     public function getAllCustomers()
@@ -93,21 +84,12 @@ class DatabaseHelpers
     }
 
 
-    public function getRes()
-    {
-        $conn = $this->connect();
-        $stmt = $conn->query("SELECT * FROM reservations r INNER JOIN customers c ON r.customerId = c.id WHERE r.status = 'active'");
-        while ($row = $stmt->fetch()){
-            $reservations[] = $row ;
-        }
-        return $reservations;
-    }
 
 
 
 
     private function getCustByName($conn, $firstName, $phone){
-        $row = $conn->query("SELECT * FROM customers WHERE firstName = '$firstName' AND phone = '$phone'")->fetch();
+        $row = $conn->query("SELECT * FROM customers WHERE firstName = $firstName AND phone = '$phone'")->fetch();
         return $row?  $row: -1;
     }
 
@@ -128,12 +110,22 @@ class DatabaseHelpers
 
     }
 
-//============= reservations AND customers ==============================
+//============= get reservations AND customers ==============================
 
     public function getActResById($id){
         $conn = $this->connect();
         $row = $conn->query("SELECT (id, firstName, phone) FROM customers WHERE id=$id")->fetch();
         return $row;
+    }
+
+    public function getRes($firstName, $lpp, $startMonth)
+    {
+        $conn = $this->connect();
+        $stmt = $conn->query("SELECT * FROM reservations r INNER JOIN customers c ON r.customerId = c.id WHERE r.status = 'active' AND c.firstName LIKE '$firstName%' AND r.rezMonth >= $startMonth LIMIT $lpp");
+        while ($row = $stmt->fetch()){
+            $reservations[] = $row ;
+        }
+        return $reservations;
     }
 
 

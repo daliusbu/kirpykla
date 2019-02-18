@@ -26,12 +26,7 @@ class StaffController
 
     public function reservations($params = 'default')
     {
-        echo 'Staff controlle reservations method';
         $reservations = $this->modelObj->getReservations();
         $this->viewObj->showReservations($reservations);
-
-        var_dump($reservations);
-
-        return "This is it";
     }
 }

@@ -16,21 +16,14 @@ class StaffModel
         $this->message = "Welcome to the of PHP MVC framework official site.";
     }
 
-    public function nowADays()
-    {
-        return $this->message = "nowadays everybody wants to be a boss.";
-    }
-
-    public function getit()
-    {
-        return 'OHOOHO';
-    }
-
     public function getReservations()
     {
         include_once 'DatabaseHelpers.php';
+        $firstName = $_POST['firstName']? $_POST['firstName']: '%';
+        $lpp = $_POST['lpp']? $_POST['lpp']: 10;
+        $startMonth = $_POST['startMonth'] + 1;
         $db = new DatabaseHelpers;
-        $reservations = $db->getRes();
+        $reservations = $db->getRes($firstName, $lpp, $startMonth);
         return $reservations;
     }
 
