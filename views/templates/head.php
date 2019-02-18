@@ -86,7 +86,7 @@
             </li>
 <?php
 
-            $a = $_SERVER['HTTPS'];
+            $a = $_SERVER['SERVER_PORT'] == 443;
             var_dump ($a);
           ?>
 
