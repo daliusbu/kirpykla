@@ -30,7 +30,7 @@ class ReservationView
             'rugsėjis', 'spalis', 'lapkritis',
             'gruodis'];
         include 'templates/reservations/confirm.php';
-       
+
     }
 
     public function showUpdateForm()
