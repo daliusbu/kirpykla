@@ -64,10 +64,7 @@ class DatabaseHelpers
     public function getActiveRes($custId)
     {
         $conn = $this->connect();
-
-        $stmt = $conn->prepare("SELECT *  FROM reservations WHERE customerId = :customerId AND status = 'active'");
-        $stmt->execute( array(':customerId'=> $custId));
-
+        $stmt = $conn->query("SELECT *  FROM reservations WHERE customerId = $custId AND status = 'active'");
         while ($row = $stmt->fetch()){
             $reservations[] = $row ;
         }
@@ -89,14 +86,15 @@ class DatabaseHelpers
     }
 
 
-    private function getCustByName($conn, $firstName, $phone){
+    public function getCustByName($firstName, $phone){
+        $conn = $this->connect();
         $row = $conn->query("SELECT * FROM customers WHERE firstName = '$firstName'AND phone = '$phone'")->fetch();
         return $row?  $row: -1;
     }
 
     public function updateCust($firstName, $phone, $visit){
         $conn = $this->connect();
-        $cust = $this->getCustByName($conn, $firstName, $phone);
+        $cust = $this->getCustByName($firstName, $phone);
         if ($cust == -1){
             $visits = 1;
             $conn->exec("INSERT INTO customers (created, firstName, phone, visits) VALUES  (NOW(), '$firstName', '$phone', $visits)");
@@ -106,7 +104,7 @@ class DatabaseHelpers
             $conn->exec("UPDATE customers SET visits=$visits WHERE id = $id");
         }
 
-        $cust = $this->getCustByName($conn, $firstName, $phone);
+        $cust = $this->getCustByName( $firstName, $phone);
         return $cust;
 
     }

@@ -24,12 +24,13 @@ I Klientas gali pasirinkti iš dviejų Meniu punktų:
     Atsidariusiame lange reikia:
       - suvesti savo vardą ir tel. nr, kuriais buvo atliekama rezervacija
       - jeigu tokie duomeny yra klientų lentelėje - parodoma rezervacijos informacija.
-      - klientas gali atsaukti rezervacija paspaudes 'Atsaukti'
+      - klientas gali atšaukti rezervacija paspaudes 'Atšaukti'
       - Atšaukus rezervaciją klientas gali vėl sukurti naują rezervaciją.
 
 II Personalas gali pasirinkti iš vieno Meniu punkto:
 
   1) Personalui->Klientų rezervacijos
+  
     - Jeigu Personalo atstovas (toliau 'Kirpėja') prie puslapio prisijungia pirmą kartą - reikia suvesti vartotojo vartą ir slaptažodį.
     
     - Kolkas yra trys vartotojai, kurių vardai ir slaptažodžiai: ('Marija' => '123','Urte' => '456','Adele' => '789')
@@ -41,4 +42,7 @@ II Personalas gali pasirinkti iš vieno Meniu punkto:
     - Lentelėje yra stulpelis 'Nuolaida', kuriame kas penktą kliento apsilankymą atsiranda mygtukas parodantis Kirpėjai, kad klientui reikia suteikti 10% nuolaidą
     - Jeigu duomenų yra daugiau nei telpa lentelėje - apačioje atiranda puslapių mygtukai
     
-  2) Kirpėjai pabaigus darbą galima atsijungti paspaudus Meniu nuordą 'Atsijungti' arba uždarius naršyklę. 
+  
+  2) Naują klientą ir jo apsilankymą Kirpėja gali užregistruoti ta pačia tvarka, kaip tai darytų ir pats klientas
+  
+  3) Kirpėjai pabaigus darbą galima atsijungti paspaudus Meniu nuordą 'Atsijungti' arba uždarius naršyklę. 

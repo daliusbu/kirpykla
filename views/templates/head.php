@@ -29,30 +29,27 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Apie mus <span class="sr-only">(current)</span></a>
+            <li class="nav-item ">
+                <a class="nav-link disabled" href="#">Apie mus <span class="sr-only">(current)</span></a>
             </li>
 
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown active">
                 <a class="nav-link dropdown-toggle" href="#" id="customerDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Klientams
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item"
 
-                       href="<?php echo (ROOT_URL . NEW_RES_URL); ?>">Rezervuoti laika</a>
-                    <a class="dropdown-item" href="<?php echo (ROOT_URL . UPDATE_URL) ?>">Keisti rezervacija</a>
+                       href="<?php echo (ROOT_URL . NEW_RES_URL); ?>">Rezervuoti laiką</a>
+                    <a class="dropdown-item" href="<?php echo (ROOT_URL . UPDATE_URL) ?>">Keisti rezervaciją</a>
 
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item disabled" href="#">
                         Atsiliepimai
                     </a>
                 </div>
             </li>
-
         </ul>
-
-
     </div>
 
 
@@ -64,12 +61,9 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="
                     <?php echo (ROOT_URL . RESERVATIONS_URL) ?>
-">Klientu rezervacijos</a>
-                    <a class="dropdown-item" href="#">Papildomos funcijos</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="">
-                       Registruoti vartotoja
-                    </a>
+">Klientų rezervacijos</a>
+                    <a class="dropdown-item disabled" href="#">Papildomos funcijos ateity</a>
+
                 </div>
             </li>
 <?php

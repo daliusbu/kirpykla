@@ -41,6 +41,20 @@ class ReservationController
         echo $view;
     }
 
+    public function check()
+    {
+        $customer = $this->modelObj->getCustomer($_POST);
+
+        if ($customer == -1){
+            $msg = 'Tokio kliento nėra - patikslinkite savo duomenis arba rezervuokite iš naujo';
+            return $this->viewObj->showUpdateForm($msg);
+        } else {
+            $reservations = $this->modelObj->getActiveReservations($customer['id']);
+        }
+        echo $this->viewObj->resConfirm([$customer,$reservations ]);
+
+    }
+
     public function listAll($params = 'default')
     {
 
@@ -54,9 +68,9 @@ class ReservationController
     {
         $isDeleted = $this->modelObj->removeRes($ids);
         if ($isDeleted){
-            $msg =  'Rezervacija sekmingai pasalinta';
+            $msg =  'Rezervacija sėkmingai atšaukta';
         }else {
-            $msg = 'Rezervacijos pasalinti nepavyko';
+            $msg = 'Rezervacijos atšaukti nepavyko';
         }
         $this->make($msg);
 

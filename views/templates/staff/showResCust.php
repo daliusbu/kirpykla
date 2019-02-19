@@ -2,10 +2,9 @@
 
 <body>
 <div class="container">
-    <h2 class="mt-4 mx-auto">Klientu rezervacijos kirpykloje</h2>
+    <h2 class="mt-4 mx-auto">Klientų rezervacijos kirpykloje</h2>
 
-    <div class="mt-4 mx-auto">
-        <p>Paieska rezultatuose</p>
+    <div class="mt-4 mx-auto mb-5">
 
         <?php if($msg && gettype($msg) == 'string'){
             echo ('<div class="alert alert-danger" role="alert">' . $msg . '</div>');
@@ -14,7 +13,7 @@
         <form name="filterRes" method="get">
             <div class="form-row">
                 <div class="form-group col-md-3">
-                    <label for="lpp">Rodyti irasu</label>
+                    <label for="lpp">Rodyti eilučių</label>
                     <select name="lpp" class="form-control" id="lpp">
                         <option value="10">10</option>
                         <option value="25">25</option>
@@ -27,7 +26,7 @@
                 </div>
 
                 <div class="form-group col-md-3 ">
-                    <label for="startMonth">Pradzios data</label>
+                    <label for="startMonth">Pradžios data</label>
                     <div class="form-row">
                         <select name="startMonth" id="startMonth" class="form-control col-md-5">
                             <?php for ($i = 0; $i<13; $i++){
@@ -35,6 +34,7 @@
                             } ?>
                         </select>
                         <select name="startDay" id="startDay" class="form-control col-md-3">
+<!--                            <option value="--><?php //echo date('d') ?><!--"  selected = "selected" >--><?php //echo date('d') ?><!--</option>-->
                             <?php for ($i = 1; $i<32; $i++){
                                 echo "<option value='$i'>$i</option>";
                             } ?>
@@ -63,7 +63,6 @@
                 <button type="submit" class="btn btn-primary">Filtruoti</button>
             </div>
         </form>
-
     </div>
 
     <table id="example" class="table display"  style="width:100%">
@@ -73,7 +72,7 @@
             <th scope="col">Vardas</th>
             <th scope="col">Data</th>
             <th scope="col">Laikas</th>
-            <th scope="col">Salinti</th>
+            <th scope="col">Šalinti</th>
             <th scope="col">Apsilankymai</th>
             <th scope="col">Nuolaida</th>
         </tr>
@@ -88,7 +87,7 @@
                 <td><?php echo $row['firstName']; ?></td>
                 <td><?php echo $months[$row['rezMonth'] -1] . ' ' . sprintf("%02d", $row['rezDay']); ?></td>
                 <td><?php echo $row['rezHour'] . ' : ' . sprintf("%02d", $row['rezMin']); ?></td>
-                <td><a href="/nfq/index.php/staff/removeres/<?php echo $row[0] ?>/<?php echo $row[1] ?>"><button type="button" class="btn btn-sm btn-outline-danger">Atsaukti</button></a></td>
+                <td><a href="/nfq/index.php/staff/removeres/<?php echo $row[0] ?>/<?php echo $row[1] ?>"><button type="button" class="btn btn-sm btn-outline-danger">Atšaukti</button></a></td>
                 <td><?php echo $row['visits']; ?></td>
                 <td><?php if($row['visits']%5 == 0){echo '<button type="button" class="btn btn-sm btn-success">NUOLAIDA!</button>';}?></td>
             </tr>
@@ -153,17 +152,34 @@
 <!--================ Javascrpits ===================-->
 
 <script type="text/javascript">
-    document.getElementById('lpp').value = "<?php echo $_GET['lpp'];?>";
-    document.getElementById('firstName').value = "<?php echo $_GET['firstName'];?>";
-    document.getElementById('startMonth').value = "<?php echo $_GET['startMonth'];?>";
-    document.getElementById('startDay').value = "<?php echo $_GET['startDay'];?>";
-    document.getElementById('endMonth').value = "<?php echo $_GET['endMonth'];?>";
-    document.getElementById('endDay').value = "<?php echo $_GET['endDay'];?>";
-</script>
-
-<script>
-
+    <?php if($_GET['lpp'] == 25 || $_GET['lpp'] == 50){ ?>
+        document.getElementById('lpp').value = "<?php echo $_GET['lpp'];?>";
+   <?php } ?>
+    <?php if($_GET['firstName'] !== ''){ ?>
+        document.getElementById('firstName').value = "<?php echo $_GET['firstName'];?>";
+    <?php } ?>
+    <?php if($_GET['startMonth'] != null ){ ?>
+        document.getElementById('startMonth').value = "<?php echo $_GET['startMonth'];?>";
+    <?php } else { ?>
+        document.getElementById('startMonth').value = "<?php echo date('n');?>";
+    <?php } ?>
+    <?php if($_GET['startDay'] != null ){ ?>
+        document.getElementById('startDay').value = "<?php echo $_GET['startDay'];?>";
+        <?php } else { ?>
+        document.getElementById('startDay').value = "<?php echo date('j');?>";
+    <?php } ?>
+    <?php if($_GET['endMonth'] != null ){ ?>
+        document.getElementById('endMonth').value = "<?php echo $_GET['endMonth'];?>";
+        <?php } else { ?>
+        document.getElementById('endMonth').value = "<?php echo date('n', strtotime("+2 week"));?>";
+    <?php } ?>
+    <?php if($_GET['startDay'] != null ){ ?>
+        document.getElementById('endDay').value = "<?php echo $_GET['endDay'];?>";
+        <?php } else { ?>
+        document.getElementById('endDay').value = "<?php echo date('j', strtotime("+2 week"));?>";
+    <?php } ?>
 </script>
 
 </body>
 </html>
+

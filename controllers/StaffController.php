@@ -30,9 +30,9 @@ class StaffController
 
         $isDeleted = $this->modelObj->removeRes($ids);
        if ($isDeleted){
-           $msg =  'Rezervacija sekmingai pasalinta';
+           $msg =  'Rezervacija sėkmingai atšaukta';
        }else {
-          $msg = 'Rezervacijos pasalinti nepavyko';
+          $msg = 'Rezervacijos atšaukti nepavyko';
        }
        $this->reservations($msg);
 

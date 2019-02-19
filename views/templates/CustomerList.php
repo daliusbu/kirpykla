@@ -22,7 +22,7 @@
                 echo ("<td> $data  </td> ");
             }
             echo "<td><a href='http://localhost/nfq/index.php/staff/update/" . $customer[0] . "' ><button>Keisti</button></a></td>";
-            echo "<td><a href='http://localhost/nfq/index.php/staff/delete/" . $customer[0] . "' ><button>Salinti</button></a></td>";
+            echo "<td><a href='http://localhost/nfq/index.php/staff/delete/" . $customer[0] . "' ><button>Šalinti</button></a></td>";
             echo '</tr>';
         } ?>
 </table>

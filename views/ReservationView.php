@@ -33,7 +33,7 @@ class ReservationView
 
     }
 
-    public function showUpdateForm()
+    public function showUpdateForm($msg = '')
     {
         session_start();
         include (__DIR__ . '/../config/env.php');

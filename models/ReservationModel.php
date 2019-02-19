@@ -23,11 +23,23 @@ class ReservationModel
         return [$cust, $res];
     }
 
-    public function getActiveReservation($id)
+
+    public function getCustomer($namePhone)
     {
         include_once 'DatabaseHelpers.php';
         $db = new DatabaseHelpers;
-        $cust = $db->getActResById($id);
+        return $db->getCustByName($namePhone['firstName'], $namePhone['phone']);
+    }
+
+
+
+    public function getActiveReservations($id)
+    {
+        include_once 'DatabaseHelpers.php';
+        $db = new DatabaseHelpers;
+        $reservations = $db->getActiveRes($id);
+
+        return $reservations;
     }
 
 // Returns array of times that are not in reservation database on passed in date
