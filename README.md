@@ -31,9 +31,11 @@ II Personalas gali pasirinkti iš vieno Meniu punkto:
 
   1) Personalui->Klientų rezervacijos
     - Jeigu Personalo atstovas (toliau 'Kirpėja') prie puslapio prisijungia pirmą kartą - reikia suvesti vartotojo vartą ir slaptažodį.
+    
     - Kolkas yra trys vartotojai, kurių vardai ir slaptažodžiai: ('Marija' => '123','Urte' => '456','Adele' => '789')
     - Prisijungus, atsidaro langas, kuriame rodomi visos aktyvios rezervacijos surikiuotos pagal daugiausiai apsilankymų turintį klientą
-    - Rezervacijų sąrašą galima filtruoti pasirenkant Kliento vardą, rezervacijos periodo pradžią ir pabaigą
+    
+    - Rezervacijų sąrašą galima filtruoti pasirenkant Kliento vardą, rezervacijos periodo pradžią ir pabaigą\n
     - Rodomų Rezervacijų skaičių galima pasirinkti iš 10 (default), 25 ir 50
     - Prie kiekvieno įrašo yra mygtukas 'Atšaukti', kurį paspaudus ta kliento registracija pašalinama (klientas nepašalinmas)
     - Lentelėje yra stulpelis 'Nuolaida', kuriame kas penktą kliento apsilankymą atsiranda mygtukas parodantis Kirpėjai, kad klientui reikia suteikti 10% nuolaidą
