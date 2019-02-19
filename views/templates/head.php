@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -16,13 +15,13 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    <title>Kirpykla</title>
+    <title>Kerpu-Kerpu</title>
 </head>
 
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
-    <a class="navbar-brand" href="#">Kerpu-Kerpu</a>
+    <a class="navbar-brand" href="<?php echo (ROOT_URL); ?>">Kerpu-Kerpu</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -30,9 +29,8 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item ">
-                <a class="nav-link disabled" href="#">Apie mus <span class="sr-only">(current)</span></a>
+                <a class="nav-link " href="<?php echo (ROOT_URL); ?>">Pirmas puslapis<span class="sr-only">(current)</span></a>
             </li>
-
             <li class="nav-item dropdown active">
                 <a class="nav-link dropdown-toggle" href="#" id="customerDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Klientams
@@ -51,8 +49,6 @@
             </li>
         </ul>
     </div>
-
-
         <ul class="navbar-nav ml-auto " >
  <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="staffDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -68,12 +64,8 @@
             </li>
 <?php
 if(isset($_SESSION['UserData']['Username'])) {
-    echo ('
-            <li class="nav-item" >
-                <a class="nav-link" href = "' . ROOT_URL . LOGOUT_URL . '" > Atsijungti</a >
-            </li >
-        </ul >'
-    );}
+    echo ('<li class="nav-item" ><a class="nav-link" href = "' . ROOT_URL . LOGOUT_URL . '" > Atsijungti</a></li >' );
+}
 ?>
-
+        </ul >
 </nav>

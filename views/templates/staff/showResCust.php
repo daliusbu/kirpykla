@@ -102,12 +102,11 @@
 
     <!--    PAGINATION    -->
 
-    <div class="h-100 row align-items-center" style="margin-left: 40%; margin-bottom: 40px;">
+    <div class="h-100 row d-flex justify-content-center mb-5" >
         <nav>
             <ul class="pagination">
                 <?php
                 $range = 3;
-                // if not on page 1, don't show back links
                 if ($currentpage > 1) {
                     // show << link to go back to page 1
                     echo " <li class=\"page-item\"><a class=\"page-link\" href='{$_SERVER['PHP_SELF']}?{$_SERVER['QUERY_STRING']}&currentpage=1'> << </a> </li>";

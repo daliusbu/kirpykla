@@ -3,22 +3,11 @@
 if ($_SERVER["HTTP_HOST"] == 'localhost'){
 
     //---------------localhost---------------------
-
     define(ROOT_URL, 'http://' . $_SERVER["HTTP_HOST"] . '/nfq/index.php');
-
-
 } else {
-
     //---------------heroku---------------------
-
     define(ROOT_URL, 'https://' . $_SERVER["HTTP_HOST"] . '/index.php');
-
-
-
 }
-
-
-
 //---------------general---------------------
 
 define(LOGIN_URL, '/login');

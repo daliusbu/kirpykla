@@ -19,7 +19,7 @@ class DatabaseHelpers
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $conn;
     }
-
+//============= customers ==============================
 
     public function getAllCustomers()
     {
@@ -33,6 +33,21 @@ class DatabaseHelpers
         return $customers;
     }
 
+    public function updateCust($firstName, $phone, $visit){
+        $conn = $this->connect();
+        $cust = $this->getCustByName($firstName, $phone);
+        if ($cust == -1){
+            $visits = 1;
+            $conn->exec("INSERT INTO customers (created, firstName, phone, visits) VALUES  (NOW(), '$firstName', '$phone', $visits)");
+        }else{
+            $visits = $cust['visits'] + $visit;
+            $id = $cust['id'];
+            $conn->exec("UPDATE customers SET visits=$visits WHERE id = $id");
+        }
+        $cust = $this->getCustByName( $firstName, $phone);
+        return $cust;
+    }
+
 
 //============= reservations ==============================
 
@@ -40,7 +55,6 @@ class DatabaseHelpers
     {
         $conn = $this->connect();
         $table = "reservations";
-
         $month = $reservation['month'];
         $day = $reservation['day'];
         $timeArray = explode('|',$reservation['time']);
@@ -55,10 +69,8 @@ class DatabaseHelpers
             return $isActive;
         }
         $conn->exec("INSERT INTO $table (customerId, dateFill, rezMonth, rezDay, rezHour, rezMin, status) VALUES  ($custId, NOW(), $month, $day, $hour, $min, '$status')");
-
         $result = $this->getActiveRes($custId);
         return $result;
-
     }
 
     public function getActiveRes($custId)
@@ -78,13 +90,11 @@ class DatabaseHelpers
         $table = "reservations";
         $stmt = $conn->prepare("SELECT rezHour, rezMin  FROM $table WHERE rezMonth = :rezMonth AND rezDay = :rezDay");
         $stmt->execute( array(':rezMonth'=> $month, ':rezDay' => $day));
-
         while ($row = $stmt->fetch(PDO::FETCH_NUM)){
             $timesOccupied[] = $row ;
         }
         return $timesOccupied;
     }
-
 
     public function getCustByName($firstName, $phone){
         $conn = $this->connect();
@@ -92,21 +102,20 @@ class DatabaseHelpers
         return $row?  $row: -1;
     }
 
-    public function updateCust($firstName, $phone, $visit){
+    public function getRes($firstName, $lpp, $offset, $startMonth, $startDay, $endMonth, $endDay)
+    {
         $conn = $this->connect();
-        $cust = $this->getCustByName($firstName, $phone);
-        if ($cust == -1){
-            $visits = 1;
-            $conn->exec("INSERT INTO customers (created, firstName, phone, visits) VALUES  (NOW(), '$firstName', '$phone', $visits)");
-        }else{
-            $visits = $cust['visits'] + $visit;
-            $id = $cust['id'];
-            $conn->exec("UPDATE customers SET visits=$visits WHERE id = $id");
+
+        // Count Total number of records
+        $stmt1 = $conn->query("SELECT COUNT(r.id) FROM reservations r INNER JOIN customers c ON r.customerId = c.id WHERE r.status = 'active' AND c.firstName LIKE '$firstName%' AND ((r.rezMonth = $startMonth  AND r.rezDay >= $startDay) OR (r.rezMonth < $endMonth AND r.rezMonth > $startMonth)OR ( r.rezMonth = $endMonth AND r.rezDay <= $endDay)) ");
+        $totalRecords = $stmt1->fetch();
+
+        // Select line per page (lpp) number of records
+        $stmt2 = $conn->query("SELECT * FROM reservations r INNER JOIN customers c ON r.customerId = c.id WHERE r.status = 'active' AND c.firstName LIKE '$firstName%' AND ((r.rezMonth = $startMonth  AND r.rezDay >= $startDay) OR (r.rezMonth < $endMonth AND r.rezMonth > $startMonth)OR ( r.rezMonth = $endMonth AND r.rezDay <= $endDay)) ORDER BY c.visits DESC LIMIT $offset, $lpp");
+        while ($row = $stmt2->fetch()){
+            $reservations[] = $row ;
         }
-
-        $cust = $this->getCustByName( $firstName, $phone);
-        return $cust;
-
+        return [$reservations, $totalRecords];
     }
 
 
@@ -133,21 +142,6 @@ class DatabaseHelpers
 
 
 
-    public function getRes($firstName, $lpp, $offset, $startMonth, $startDay, $endMonth, $endDay)
-    {
-        $conn = $this->connect();
-
-        // Count Total number of records
-        $stmt1 = $conn->query("SELECT COUNT(r.id) FROM reservations r INNER JOIN customers c ON r.customerId = c.id WHERE r.status = 'active' AND c.firstName LIKE '$firstName%' AND ((r.rezMonth = $startMonth  AND r.rezDay >= $startDay) OR (r.rezMonth < $endMonth AND r.rezMonth > $startMonth)OR ( r.rezMonth = $endMonth AND r.rezDay <= $endDay)) ");
-        $totalRecords = $stmt1->fetch();
-
-        // Select line per page (lpp) number of records
-        $stmt2 = $conn->query("SELECT * FROM reservations r INNER JOIN customers c ON r.customerId = c.id WHERE r.status = 'active' AND c.firstName LIKE '$firstName%' AND ((r.rezMonth = $startMonth  AND r.rezDay >= $startDay) OR (r.rezMonth < $endMonth AND r.rezMonth > $startMonth)OR ( r.rezMonth = $endMonth AND r.rezDay <= $endDay)) ORDER BY c.visits DESC LIMIT $offset, $lpp");
-        while ($row = $stmt2->fetch()){
-            $reservations[] = $row ;
-        }
-        return [$reservations, $totalRecords];
-    }
 
 
 }

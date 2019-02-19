@@ -34,7 +34,7 @@
             <td><?php echo $res['rezHour'] . ' : ' . sprintf("%02d", $res['rezMin']); ?></td>
 
             <td><a href="<?php echo ROOT_URL . CUST_REMOVE_URL . $res[0] . '/' . $res[1] ?>"><button type="button" class="btn btn-sm btn-outline-danger">Atšaukti </button></a></td>
-            <td><?php echo 5 - $custRes[0]['visits']%5; ?></td>
+            <td><?php echo 5 - $custRes[0]['visits']%5; ?> apsilankymai</td>
         </tr>
         <?php $i++;} ?>
            </tbody>

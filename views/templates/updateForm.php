@@ -18,16 +18,9 @@
     </div>
         <button type="submit" class="btn btn-primary" name="submit" value="submit">Rodyti rezervacija</button>
     </div>
-
-
 </form>
 
 </div>
-
-
-
-
-
 
 </body>
 </html>

@@ -8,7 +8,6 @@
 
 class ReservationView
 {
-
     public function getForm($msg)
     {
         session_start();
@@ -21,16 +20,15 @@ class ReservationView
         session_start();
         include (__DIR__ . '/../config/env.php');
 
-        if($custRes[1][0][8] == 'isActive'){
-            $isActive = true;
-        }
+//        if($custRes[1][0][8] == 'isActive'){
+//            $isActive = true;
+//        }
         $months = ['sausis', 'vasaris',
             'kovas', 'balandis', 'gegužė',
             'birželis', 'liepa', 'rugpjūtis',
             'rugsėjis', 'spalis', 'lapkritis',
             'gruodis'];
         include 'templates/reservations/confirm.php';
-
     }
 
     public function showUpdateForm($msg = '')

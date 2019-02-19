@@ -8,38 +8,19 @@
 
 class IndexView
 {
-
     private $model;
-
     private $controller;
-
-    private $belekas = '<h1> this is a test h1</h1>';
-
 
     function __construct($controller, $model)
     {
         $this->controller = $controller;
-
         $this->model = $model;
-
-        print $this->belekas;
-
-    }
-
-    public function showAll()
-    {
-
     }
 
     public function index()
     {
-        $ourlist = ['peter', 'gabriel', 'the third'];
-        require 'templates/CustomerList.php';
-        return $this->controller->sayWelcome();
-    }
-
-    public function action()
-    {
-        return $this->controller->takeAction();
+        session_start();
+        include (__DIR__ . '/../config/env.php');
+        include ('templates/home.php');
     }
 }

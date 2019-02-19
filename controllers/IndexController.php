@@ -16,9 +16,5 @@ class IndexController
         $this->model = $model;
     }
 
-    public function sayWelcome()
-    {
-        return $this->model->welcomeMessage();
-    }
 
 }
