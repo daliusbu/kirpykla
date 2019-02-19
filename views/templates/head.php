@@ -41,7 +41,8 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item"
-                       href="<?php echo ('http://'.$_SERVER['SERVER_NAME'].'/nfq/index.php/reservation/make'); ?>">Rezervuoti laika</a>
+
+                       href="<?php echo (ROOT_URL . NEW_RES_URL); ?>">Rezervuoti laika</a>
                     <a class="dropdown-item" href="#">Keisti rezervacija</a>
 
                     <div class="dropdown-divider"></div>
@@ -56,7 +57,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="
-                    <?php echo ('http://'.$_SERVER['SERVER_NAME'].'/nfq/index.php/staff/reservations') ?>
+                    <?php echo (ROOT_URL . RESERVATIONS_URL) ?>
 ">Klientu rezervacijos</a>
                     <a class="dropdown-item" href="#">Rezervacijos</a>
                     <div class="dropdown-divider"></div>
@@ -70,4 +71,16 @@
 
 
     </div>
+
+<?php
+ if(isset($_SESSION['UserData']['Username'])) {
+echo (
+        '<ul class="navbar-nav ml-auto " >
+            <li class="nav-item" >
+                <a class="nav-link" href = "' . ROOT_URL . LOGOUT_URL . '" > Atsijungti</a >
+            </li >
+        </ul >'
+    );}
+?>
+
 </nav>

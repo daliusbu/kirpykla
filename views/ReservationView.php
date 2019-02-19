@@ -11,11 +11,16 @@ class ReservationView
 
     public function getForm()
     {
+        session_start();
+        include (__DIR__ . '/../config/env.php');
         include 'templates/reservationForm.php';
     }
 
     public function resConfirm($custRes)
     {
+        session_start();
+        include (__DIR__ . '/../config/env.php');
+
         if($custRes[1][0][8] == 'isActive'){
             $isActive = true;
         }

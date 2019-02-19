@@ -19,11 +19,6 @@ class StaffController
 
     }
 
-    public function current()
-    {
-        return $this->modelObj->message = "About us today changed by aboutController.";
-    }
-
     public function reservations($msg = 'default')
     {
         $reservations = $this->modelObj->getReservations();

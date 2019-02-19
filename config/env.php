@@ -1,20 +1,30 @@
 <?php
 
+if ($_SERVER["HTTP_HOST"] == 'localhost'){
 
-//---------------localhost---------------------
+    //---------------localhost---------------------
 
-$Juozas = 'This is Juozas from env.config';
+    define(ROOT_URL, 'http://' . $_SERVER["HTTP_HOST"] . '/nfq/index.php');
 
-define(ROOT_URL, 'http://' . $_SERVER["HTTP_HOST"] . '/nfq/index.php');
+
+} else {
+
+    //---------------heroku---------------------
+
+    define(ROOT_URL, 'https://' . $_SERVER["HTTP_HOST"] . '/index.php');
+
+
+
+}
+
+
+
+//---------------general---------------------
+
 define(LOGIN_URL, '/login');
-
-
-
-
-
-//---------------heroku---------------------
-
-
+define(LOGOUT_URL, '/logout');
+define(NEW_RES_URL, '/reservation/make');
+define(RESERVATIONS_URL, '/staff/reservations');
 
 
 
