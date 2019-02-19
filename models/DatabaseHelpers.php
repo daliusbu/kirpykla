@@ -84,12 +84,8 @@ class DatabaseHelpers
     }
 
 
-
-
-
-
     private function getCustByName($conn, $firstName, $phone){
-        $row = $conn->query("SELECT * FROM customers WHERE firstName = $firstName AND phone = '$phone'")->fetch();
+        $row = $conn->query("SELECT * FROM customers WHERE firstName = '$firstName'AND phone = '$phone'")->fetch();
         return $row?  $row: -1;
     }
 
@@ -110,6 +106,19 @@ class DatabaseHelpers
 
     }
 
+
+
+//============= remove reservations  ==============================
+
+    public function removeRes($id)
+    {
+        $conn = $this->connect();
+        $id = $id[0];
+        $result = $conn->exec("DELETE FROM reservations WHERE id = $id");
+        return $result;
+    }
+
+
 //============= get reservations AND customers ==============================
 
     public function getActResById($id){
@@ -118,10 +127,7 @@ class DatabaseHelpers
         return $row;
     }
 
-    public function getNumberOfRows()
-    {
 
-    }
 
     public function getRes($firstName, $lpp, $offset, $startMonth, $startDay, $endMonth, $endDay)
     {

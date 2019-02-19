@@ -7,6 +7,10 @@
     <div class="mt-4 mx-auto">
         <p>Paieska rezultatuose</p>
 
+        <?php if($msg){
+            echo ('<div class="alert alert-danger" role="alert">' . $msg . '</div>');
+        } ?>
+
         <form name="filterRes" method="get">
             <div class="form-row">
                 <div class="form-group col-md-3">
@@ -69,21 +73,24 @@
             <th scope="col">Vardas</th>
             <th scope="col">Data</th>
             <th scope="col">Laikas</th>
-            <th scope="col">Keisti</th>
+            <th scope="col">Salinti</th>
             <th scope="col">Apsilankymai</th>
+            <th scope="col">Nuolaida</th>
         </tr>
         </thead>
         <tbody>
         <?php
         $i = 1;
+
         foreach($resCust[0] as $row){ ?>
             <tr>
                 <th scope="row"><?php echo $i; ?></th>
                 <td><?php echo $row['firstName']; ?></td>
                 <td><?php echo $months[$row['rezMonth'] -1] . ' ' . sprintf("%02d", $row['rezDay']); ?></td>
                 <td><?php echo $row['rezHour'] . ' : ' . sprintf("%02d", $row['rezMin']); ?></td>
-                <td><button>Keisti</button> <button>Salinti</button></td>
+                <td><a href="/nfq/index.php/staff/removeres/<?php echo $row[0] ?>"><button type="button" class="btn btn-sm btn-outline-danger">Salinti</button></a></td>
                 <td><?php echo $row['visits']; ?></td>
+                <td><?php if($row['visits']%5 == 0){echo '<button type="button" class="btn btn-sm btn-success">NUOLAIDA!</button>';}?></td>
             </tr>
             <?php $i++;} ?>
         </tbody>

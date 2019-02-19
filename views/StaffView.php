@@ -18,12 +18,17 @@ class StaffView
     }
 
 
-    public function showReservations($resCust)
+    public function showReservations($resCust, $msg)
     {
+        session_start();
+        include (__DIR__. '/../config/env.php');
+        if(!isset($_SESSION['UserData']['Username'])){
+            header('location:' . ROOT_URL . LOGIN_URL);
+        exit;
+        }
+
         $currentpage = $resCust[1];
         $totalpages = $resCust[2];
-
-
 
         $months = ['sausis', 'vasaris',
             'kovas', 'balandis', 'gegužė',
@@ -32,10 +37,7 @@ class StaffView
             'gruodis'];
 
         require 'templates/staff/showResCust.php';
-
-
     }
-
 
 
 

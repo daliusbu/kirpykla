@@ -60,10 +60,14 @@ class StaffModel
 
         $reservations = $db->getRes($firstName, $lpp, $offset, $startMonth, $startDay, $endMonth, $endDay);
 
-
-
         return [$reservations[0], $currentpage, $totalpages];
 
+    }
+
+    public function removeRes($id)
+    {
+        require_once 'DatabaseHelpers.php';
+        return (new DatabaseHelpers())->removeRes($id);
     }
 
     public function getAllCustomers()

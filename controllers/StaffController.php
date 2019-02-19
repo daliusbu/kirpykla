@@ -24,9 +24,21 @@ class StaffController
         return $this->modelObj->message = "About us today changed by aboutController.";
     }
 
-    public function reservations($params = 'default')
+    public function reservations($msg = 'default')
     {
         $reservations = $this->modelObj->getReservations();
-        $this->viewObj->showReservations($reservations);
+        $this->viewObj->showReservations($reservations, $msg);
+    }
+
+    public function removeRes($id)
+    {
+       $isDeleted = $this->modelObj->removeRes($id);
+       if ($isDeleted){
+           $msg =  'Rezervacija sekmingai pasalinta';
+       }else {
+          $msg = 'Rezervacijos pasalinti nepavyko';
+       }
+       $this->reservations($msg);
+
     }
 }
