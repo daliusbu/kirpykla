@@ -19,9 +19,9 @@ class ReservationController
     }
 
 // Displays reservation form complete with all HTML
-    public function make()
+    public function make($msg=-1)
     {
-        $this->viewObj->getForm();
+        $this->viewObj->getForm($msg);
     }
 
 // Gets free times from reservations table and displays them as JSON for AJAX request from reservationForm
@@ -37,7 +37,6 @@ class ReservationController
         $reservation = $_POST;
         $custRes = $this->modelObj->addReservation($reservation);
         $view = $this->viewObj->resConfirm($custRes);
-        var_dump($custRes);
         $message = $custRes? 'Jusu id yra ' . $custRes[0][0]: 'Rezervacija nepavyko. Bandykite dar karta';
         echo $view;
     }
@@ -49,5 +48,22 @@ class ReservationController
         return $this->viewObj->listAll($customers);
 
         return "This is " . $customers[1][1];
+    }
+
+    public function removeres($ids)
+    {
+        $isDeleted = $this->modelObj->removeRes($ids);
+        if ($isDeleted){
+            $msg =  'Rezervacija sekmingai pasalinta';
+        }else {
+            $msg = 'Rezervacijos pasalinti nepavyko';
+        }
+        $this->make($msg);
+
+    }
+
+    public function update()
+    {
+        $this->viewObj->showUpdateForm();
     }
 }

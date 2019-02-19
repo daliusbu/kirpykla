@@ -64,10 +64,10 @@ class StaffModel
 
     }
 
-    public function removeRes($id)
+    public function removeRes($ids)
     {
         require_once 'DatabaseHelpers.php';
-        return (new DatabaseHelpers())->removeRes($id);
+        return (new DatabaseHelpers())->removeRes($ids);
     }
 
     public function getAllCustomers()

@@ -7,7 +7,7 @@
     <div class="mt-4 mx-auto">
         <p>Paieska rezultatuose</p>
 
-        <?php if($msg){
+        <?php if($msg && gettype($msg) == 'string'){
             echo ('<div class="alert alert-danger" role="alert">' . $msg . '</div>');
         } ?>
 
@@ -88,7 +88,7 @@
                 <td><?php echo $row['firstName']; ?></td>
                 <td><?php echo $months[$row['rezMonth'] -1] . ' ' . sprintf("%02d", $row['rezDay']); ?></td>
                 <td><?php echo $row['rezHour'] . ' : ' . sprintf("%02d", $row['rezMin']); ?></td>
-                <td><a href="/nfq/index.php/staff/removeres/<?php echo $row[0] ?>"><button type="button" class="btn btn-sm btn-outline-danger">Salinti</button></a></td>
+                <td><a href="/nfq/index.php/staff/removeres/<?php echo $row[0] ?>/<?php echo $row[1] ?>"><button type="button" class="btn btn-sm btn-outline-danger">Atsaukti</button></a></td>
                 <td><?php echo $row['visits']; ?></td>
                 <td><?php if($row['visits']%5 == 0){echo '<button type="button" class="btn btn-sm btn-success">NUOLAIDA!</button>';}?></td>
             </tr>
@@ -104,13 +104,10 @@
     <!--    PAGINATION    -->
 
     <div class="h-100 row align-items-center" style="margin-left: 40%; margin-bottom: 40px;">
-
         <nav>
             <ul class="pagination">
                 <?php
-
                 $range = 3;
-
                 // if not on page 1, don't show back links
                 if ($currentpage > 1) {
                     // show << link to go back to page 1

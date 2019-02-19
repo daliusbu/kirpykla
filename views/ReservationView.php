@@ -9,7 +9,7 @@
 class ReservationView
 {
 
-    public function getForm()
+    public function getForm($msg)
     {
         session_start();
         include (__DIR__ . '/../config/env.php');
@@ -30,7 +30,13 @@ class ReservationView
             'rugsėjis', 'spalis', 'lapkritis',
             'gruodis'];
         include 'templates/reservations/confirm.php';
-        $message = 'This is reservation View';
-        return $message;
+       
+    }
+
+    public function showUpdateForm()
+    {
+        session_start();
+        include (__DIR__ . '/../config/env.php');
+        include 'templates/updateForm.php';
     }
 }

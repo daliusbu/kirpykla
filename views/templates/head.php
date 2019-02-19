@@ -21,8 +21,8 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
+    <a class="navbar-brand" href="#">Kerpu-Kerpu</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -30,39 +30,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Apie mus <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="customerDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Rezervacija
+                    Klientams
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item"
 
                        href="<?php echo (ROOT_URL . NEW_RES_URL); ?>">Rezervuoti laika</a>
-                    <a class="dropdown-item" href="#">Keisti rezervacija</a>
+                    <a class="dropdown-item" href="<?php echo (ROOT_URL . UPDATE_URL) ?>">Keisti rezervacija</a>
 
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">
-                        Gelekas
-                    </a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="staffDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    STAFF
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="
-                    <?php echo (ROOT_URL . RESERVATIONS_URL) ?>
-">Klientu rezervacijos</a>
-                    <a class="dropdown-item" href="#">Rezervacijos</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="">
-                       Belekas
+                        Atsiliepimai
                     </a>
                 </div>
             </li>
@@ -72,10 +55,26 @@
 
     </div>
 
+
+        <ul class="navbar-nav ml-auto " >
+ <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="staffDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Personalui
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="
+                    <?php echo (ROOT_URL . RESERVATIONS_URL) ?>
+">Klientu rezervacijos</a>
+                    <a class="dropdown-item" href="#">Papildomos funcijos</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="">
+                       Registruoti vartotoja
+                    </a>
+                </div>
+            </li>
 <?php
- if(isset($_SESSION['UserData']['Username'])) {
-echo (
-        '<ul class="navbar-nav ml-auto " >
+if(isset($_SESSION['UserData']['Username'])) {
+    echo ('
             <li class="nav-item" >
                 <a class="nav-link" href = "' . ROOT_URL . LOGOUT_URL . '" > Atsijungti</a >
             </li >

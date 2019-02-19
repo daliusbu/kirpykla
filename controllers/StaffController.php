@@ -25,9 +25,10 @@ class StaffController
         $this->viewObj->showReservations($reservations, $msg);
     }
 
-    public function removeRes($id)
+    public function removeRes($ids)
     {
-       $isDeleted = $this->modelObj->removeRes($id);
+
+        $isDeleted = $this->modelObj->removeRes($ids);
        if ($isDeleted){
            $msg =  'Rezervacija sekmingai pasalinta';
        }else {

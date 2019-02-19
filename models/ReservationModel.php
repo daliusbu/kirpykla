@@ -47,5 +47,10 @@ class ReservationModel
         return $freeTimes;
     }
 
+    public function removeRes($ids)
+    {
+        require_once 'DatabaseHelpers.php';
+        return (new DatabaseHelpers())->removeRes($ids);
+    }
 
 }

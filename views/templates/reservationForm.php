@@ -4,11 +4,8 @@
 <div class="container">
 <h3>Rezervuokite apsilankymo laika</h3>
 
-<!--TODO Change on Heroku-->
-
-    <form action="http://localhost/nfq/index.php/reservation/confirm" method="post">
-<!--<form action="https://glacial-coast-30595.herokuapp.com/index.php/reservation/confirm" method="post">-->
-
+    <?php if($msg) echo( '<div class="alert alert-success">'. $msg . '</div>') ?>
+    <form action="<?php echo ROOT_URL ?>/reservation/confirm" method="post">
     <div class="form-row" >
         <div class="form-group col-md-6">
             <label for="phone">Telefono Nr.</label>
@@ -64,10 +61,7 @@
             var month = $('#month').val();
             $.ajax({
                 type : "POST",
-// TODO Change on Heroku
-                url : "http://localhost/nfq/index.php/reservation/getFreeTimes",
-                // url : "https://glacial-coast-30595.herokuapp.com/index.php/reservation/getFreeTimes",
-
+                url : "<?php echo ROOT_URL ?>/reservation/getFreeTimes",
                 data : { 'month':month, 'day':day },
                 success : function(data) {
                     alert("it works " + data);

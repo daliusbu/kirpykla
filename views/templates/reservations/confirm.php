@@ -7,7 +7,6 @@
     if ($isActive){
         echo ('<div class="alert alert-warning" role="alert">
               <strong>Iki apsilankymo kirpykloje laika rezervuoti galima tik VIENA karta!</strong>
-              <p>Jeigu norite - galite pakeisti savo rezervacijos laika:</p>
             </div>');
     }
     ?>
@@ -32,7 +31,8 @@
             <td><?php echo $custRes[0]['firstName']; ?></td>
             <td><?php echo $months[$res['rezMonth'] -1] . ' ' . sprintf("%02d", $res['rezDay']); ?></td>
             <td><?php echo $res['rezHour'] . ' : ' . sprintf("%02d", $res['rezMin']); ?></td>
-            <td><button>Keisti</button> <button>Salinti</button></td>
+
+            <td><a href="<?php echo ROOT_URL . CUST_REMOVE_URL . $res[0] . '/' . $res[1] ?>"><button type="button" class="btn btn-sm btn-outline-danger">Atsaukti <?php echo $res[0] ?></button></a></td>
             <td><?php echo 5 - $custRes[0]['visits']%5; ?></td>
         </tr>
         <?php $i++;} ?>

@@ -64,7 +64,10 @@ class DatabaseHelpers
     public function getActiveRes($custId)
     {
         $conn = $this->connect();
-        $stmt = $conn->query("SELECT *  FROM reservations WHERE customerId = $custId AND status = 'active'");
+
+        $stmt = $conn->prepare("SELECT *  FROM reservations WHERE customerId = :customerId AND status = 'active'");
+        $stmt->execute( array(':customerId'=> $custId));
+
         while ($row = $stmt->fetch()){
             $reservations[] = $row ;
         }
@@ -76,7 +79,9 @@ class DatabaseHelpers
         $conn = $this->connect();
         $timesOccupied = [];
         $table = "reservations";
-        $stmt = $conn->query("SELECT rezHour, rezMin  FROM $table WHERE rezMonth = $month AND rezDay = $day");
+        $stmt = $conn->prepare("SELECT rezHour, rezMin  FROM $table WHERE rezMonth = :rezMonth AND rezDay = :rezDay");
+        $stmt->execute( array(':rezMonth'=> $month, ':rezDay' => $day));
+
         while ($row = $stmt->fetch(PDO::FETCH_NUM)){
             $timesOccupied[] = $row ;
         }
@@ -110,11 +115,12 @@ class DatabaseHelpers
 
 //============= remove reservations  ==============================
 
-    public function removeRes($id)
+    public function removeRes($ids)
     {
         $conn = $this->connect();
-        $id = $id[0];
-        $result = $conn->exec("DELETE FROM reservations WHERE id = $id");
+        $id = $ids[0];
+        $custId = $ids[1];
+        $result = $conn->exec("DELETE FROM reservations WHERE id = $id AND customerId = $custId");
         return $result;
     }
 
